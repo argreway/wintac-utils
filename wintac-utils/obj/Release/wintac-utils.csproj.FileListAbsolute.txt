@@ -1,0 +1,11 @@
+C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\bin\Release\wintac-utils.exe.config
+C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\bin\Release\wintac-utils.exe
+C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\bin\Release\wintac-utils.pdb
+C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\obj\Release\wintac-utils.csprojResolveAssemblyReference.cache
+C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\obj\Release\wintac_utils.MainForm.resources
+C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\obj\Release\wintac_utils.Properties.Resources.resources
+C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\obj\Release\wintac_utils.SearchBox.resources
+C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\obj\Release\wintac-utils.csproj.GenerateResource.cache
+C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\obj\Release\wintac-utils.csproj.CoreCompileInputs.cache
+C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\obj\Release\wintac-utils.exe
+C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\obj\Release\wintac-utils.pdb
