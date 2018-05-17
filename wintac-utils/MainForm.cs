@@ -219,5 +219,10 @@ namespace wintac_utils
         {
 
         }
+
+        private void calculateWOPerTechToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WorkOrderUtils.calculateOutstandingPerTech();
+        }
     }
 }

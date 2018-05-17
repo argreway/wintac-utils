@@ -57,6 +57,7 @@
             this.buttonFindReverse = new System.Windows.Forms.Button();
             this.textBoxInputFind = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.calculateWOPerTechToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -72,7 +73,7 @@
             this.statsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1614, 40);
+            this.menuStrip1.Size = new System.Drawing.Size(1614, 42);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -83,7 +84,7 @@
             this.disconnectToolStripMenuItem,
             this.closeToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(58, 36);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(58, 38);
             this.fileToolStripMenuItem.Text = "DB";
             // 
             // connectToolStripMenuItem
@@ -114,7 +115,7 @@
             this.loadCustomersToolStripMenuItem,
             this.searchCustomerToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(140, 36);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(140, 38);
             this.editToolStripMenuItem.Text = "Customers";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
@@ -139,7 +140,7 @@
             this.workOrdersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.outstandingWOToolStripMenuItem});
             this.workOrdersToolStripMenuItem.Name = "workOrdersToolStripMenuItem";
-            this.workOrdersToolStripMenuItem.Size = new System.Drawing.Size(161, 36);
+            this.workOrdersToolStripMenuItem.Size = new System.Drawing.Size(161, 38);
             this.workOrdersToolStripMenuItem.Text = "Work Orders";
             // 
             // outstandingWOToolStripMenuItem
@@ -153,22 +154,23 @@
             // statsToolStripMenuItem
             // 
             this.statsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.pongTestToolStripMenuItem});
+            this.pongTestToolStripMenuItem,
+            this.calculateWOPerTechToolStripMenuItem});
             this.statsToolStripMenuItem.Name = "statsToolStripMenuItem";
-            this.statsToolStripMenuItem.Size = new System.Drawing.Size(78, 36);
+            this.statsToolStripMenuItem.Size = new System.Drawing.Size(78, 38);
             this.statsToolStripMenuItem.Text = "Stats";
             // 
             // pongTestToolStripMenuItem
             // 
             this.pongTestToolStripMenuItem.Name = "pongTestToolStripMenuItem";
-            this.pongTestToolStripMenuItem.Size = new System.Drawing.Size(220, 38);
-            this.pongTestToolStripMenuItem.Text = "Pong Test";
+            this.pongTestToolStripMenuItem.Size = new System.Drawing.Size(357, 38);
+            this.pongTestToolStripMenuItem.Text = "Test";
             this.pongTestToolStripMenuItem.Click += new System.EventHandler(this.pongTestToolStripMenuItem_Click);
             // 
             // dataGridView1
             // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(0, 192);
@@ -261,7 +263,7 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoSize = true;
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
@@ -329,6 +331,13 @@
             this.label5.Text = "Find: ";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
+            // calculateWOPerTechToolStripMenuItem
+            // 
+            this.calculateWOPerTechToolStripMenuItem.Name = "calculateWOPerTechToolStripMenuItem";
+            this.calculateWOPerTechToolStripMenuItem.Size = new System.Drawing.Size(357, 38);
+            this.calculateWOPerTechToolStripMenuItem.Text = "Calculate WO Per Tech";
+            this.calculateWOPerTechToolStripMenuItem.Click += new System.EventHandler(this.calculateWOPerTechToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -395,6 +404,7 @@
         private System.Windows.Forms.ToolStripMenuItem outstandingWOToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem statsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pongTestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem calculateWOPerTechToolStripMenuItem;
     }
 }
 

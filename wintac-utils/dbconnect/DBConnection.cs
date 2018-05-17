@@ -100,16 +100,15 @@ namespace wintac_utils.dbconnect
             sda.Update(dataTable);
         }
 
-        public void getOutStandingWorkOrders(DateTime start, DateTime end)
+        public DataTable getOutStandingWorkOrders(DateTime start, DateTime end)
         {
-            //String selectString = "SELECT \"dbo\".\"CST\".\"CN\",\"dbo\".\"RCV\".\"JDATE\" ,\"dbo\"."RCV"."COUNTER","dbo"."RCVN"."RCVNKey" FROM "dbo"."RCV","dbo"."RCVT","dbo"."RCVN","dbo"."CST" WHERE (((((("dbo"."RCV"."FRM" = 1 ) AND (NOT(("dbo"."RCV"."JSTAT" = '*' ) ) OR ("dbo"."RCV"."JSTAT" IS NULL ) ) ) AND ("dbo"."RCV"."COUNTER" = "dbo"."RCVT"."RCVPK" ) ) AND ("dbo"."RCVT"."DATE" BETWEEN {d '2018-04-01'} AND {d '2018-04-30'} ) ) AND (("dbo"."RCV"."IN" = "dbo"."RCVN"."IN" ) AND ("dbo"."RCV"."CN" = "dbo"."RCVN"."CN" ) ) ) AND ("dbo"."CST"."CN" = "dbo"."RCV"."CN" ) )';
-            MessageBox.Show("Date: " + start.ToString("yyyy'-'MM'-'dd"));
-            String selectString = "SELECT \"dbo\".\"CST\".\"CN\",\"dbo\".\"RCV\".\"JDATE\" ,\"dbo\".\"RCV\".\"COUNTER\",\"dbo\".\"RCVN\".\"RCVNKey\" FROM \"dbo\".\"RCV\",\"dbo\".\"RCVT\",\"dbo\".\"RCVN\",\"dbo\".\"CST\" WHERE ((((((\"dbo\".\"RCV\".\"FRM\" = 1 ) AND (NOT((\"dbo\".\"RCV\".\"JSTAT\" = '*' ) ) OR (\"dbo\".\"RCV\".\"JSTAT\" IS NULL ) ) ) AND (\"dbo\".\"RCV\".\"COUNTER\" = \"dbo\".\"RCVT\".\"RCVPK\" ) ) AND (\"dbo\".\"RCVT\".\"DATE\" BETWEEN {d '" + start.ToString("yyyy'-'MM'-'dd") + "'} AND {d '" + end.ToString("yyyy'-'MM'-'dd") + "'} ) ) AND ((\"dbo\".\"RCV\".\"IN\" = \"dbo\".\"RCVN\".\"IN\" ) AND (\"dbo\".\"RCV\".\"CN\" = \"dbo\".\"RCVN\".\"CN\" ) ) ) AND (\"dbo\".\"CST\".\"CN\" = \"dbo\".\"RCV\".\"CN\" ))";
-            //String selectString = "SELECT * FROM cst";
-            // "SELECT * FROM cst WHERE " +
-            //   "REPLACE(REPLACE(REPLACE(REPLACE(name,  '#',''), '*', ''), '\"', ''), char(39), '') like '" + searchString + "%'" +
-            //  " or REPLACE(REPLACE(REPLACE(REPLACE(adr1,  '#',''), '*', ''), '\"', ''), char(39), '') like '" + searchString + "%'" +
-            // " or REPLACE(REPLACE(REPLACE(REPLACE(adr2,  '#',''), '*', ''), '\"', ''), char(39), '') like '" + searchString + "%'";
+            String selectString = "SELECT CST.CN, RCV.JDATE, RCV.COUNTER, RCVN.RCVNKey, RCVT.TECH " +
+                "FROM RCV, RCVT, RCVN, CST " +
+                "WHERE (" +
+                "(((((RCV.FRM = 1 ) AND (NOT((RCV.JSTAT = '*' )) OR (RCV.JSTAT IS NULL ))) " +
+                "AND (RCV.COUNTER = RCVT.RCVPK )) " +
+                "AND (RCVT.DATE BETWEEN {d '" + start.ToString("yyyy'-'MM'-'dd") + "'} AND {d '" + end.ToString("yyyy'-'MM'-'dd") + "'} ) ) " +
+                "AND ((RCV.\"IN\" = RCVN.\"IN\" ) AND (RCV.CN = RCVN.CN ))) " + "AND (CST.CN = RCV.CN ))";
 
             SqlCommand command = new SqlCommand(selectString, cnn);
 
@@ -124,6 +123,8 @@ namespace wintac_utils.dbconnect
 
             MainApp.getMainForm().GetDataGridView().DataSource = bsource;
             sda.Update(dataTable);
+
+            return dataTable;
         }
 
 
