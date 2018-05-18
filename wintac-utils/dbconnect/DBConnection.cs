@@ -102,7 +102,7 @@ namespace wintac_utils.dbconnect
 
         public DataTable getOutStandingWorkOrders(DateTime start, DateTime end)
         {
-            String selectString = "SELECT CST.CN, RCV.JDATE, RCV.COUNTER, RCVN.RCVNKey, RCVT.TECH " +
+            String selectString = "SELECT CST.CN, CST.NAME, RCV.ADR1, RCV.NAME, RCV.IN2, RCV.JDATE, RCV.COUNTER, RCVN.RCVNKey, RCVT.TECH " +
                 "FROM RCV, RCVT, RCVN, CST " +
                 "WHERE (" +
                 "(((((RCV.FRM = 1 ) AND (NOT((RCV.JSTAT = '*' )) OR (RCV.JSTAT IS NULL ))) " +

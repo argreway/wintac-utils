@@ -15,7 +15,7 @@ namespace wintac_utils.influxdb
         public enum MEASUREMENT
         {
             WO,
-            TECH
+            DETAILS
         }
 
         public enum WO
@@ -26,12 +26,13 @@ namespace wintac_utils.influxdb
         }
 
         protected static String INFLUX_DB_URL = "http://192.168.1.30:8086";
-        protected static String INFLUX_DB = "sentry_status";
+        protected static String INFLUX_DB = "sentry_stats";
 
-        protected static InfluxManager manager = new InfluxManager(INFLUX_DB_URL, INFLUX_DB);
+        //protected static InfluxManager manager = new InfluxManager(INFLUX_DB_URL, INFLUX_DB);
 
         public async static void testInfluxDBClient()
         {
+            InfluxManager manager = new InfluxManager(INFLUX_DB_URL, INFLUX_DB);
             Random rnd = new Random();
             int month = rnd.Next(1, 100);
             Measurement m = new Measurement("unittest").AddField("value1", month).AddField("value2", month - 1).AddTag("name", "Tony");
@@ -42,8 +43,11 @@ namespace wintac_utils.influxdb
             //MessageBox.Show("Found: " + pong);
         }
 
-        public async static Task<HttpResponseMessage> WriteStat(String measurement, Dictionary<String, int> fields, Dictionary<String, String> tags)
+        //public async static Task<HttpResponseMessage> WriteStat(String measurement, Dictionary<String, int> fields, Dictionary<String, String> tags)
+        public async static void WriteStat(String measurement, Dictionary<String, int> fields, Dictionary<String, String> tags)
         {
+            InfluxManager manager = new InfluxManager(INFLUX_DB_URL, INFLUX_DB);
+
             Measurement m = new Measurement(measurement);
             if (fields != null)
             {
@@ -55,7 +59,7 @@ namespace wintac_utils.influxdb
                 foreach (KeyValuePair<String, String> item in tags)
                     m.AddTag(item.Key, item.Value);
             }
-            return await manager.Write(m);
+            await manager.Write(m);
         }
 
     }
