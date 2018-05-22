@@ -100,16 +100,38 @@ namespace wintac_utils.dbconnect
             sda.Update(dataTable);
         }
 
-        public DataTable getOutStandingWorkOrders(DateTime start, DateTime end)
+        public DataTable getPayrollDataTable(DateTime start, DateTime end)
         {
-            String selectString = "SELECT CST.CN, CST.NAME, RCV.ADR1, RCV.NAME, RCV.IN2, RCV.JDATE, RCV.COUNTER, RCVN.RCVNKey, RCVT.TECH " +
+            String selectString = "SELECT PAY.EN , PAY.NAME , PAY.CHKNUM , PAY.CHKDATE , PAY.NHOURS , PAY.OHOURS , PAY.SHOURS , PAY.VHOURS , PAY.HOURS5 , PAY.HOURS6 , PAY.HOURS7 , PAY.HOURS8 , PAY.HOURS9 , PAY.HOURS10 , " +
+                "PAY.GROSS , PAY.TIPS , PAY.FED_WH , PAY.ST_WH , PAY.LOC_WH , PAY.SOC , PAY.MED , PAY.BEN , PAY.ATSAV , PAY.BTSAV , PAY.REIMB , PAY.MISC1 , PAY.DED5 , PAY.DED6 , PAY.DED7 , PAY.DED8 , PAY.DED9 , PAY.DED10 , PAY.SDI , PAY.FLI , PAY.SUI " +
+                "FROM PAY, EMP " +
+                "WHERE((PAY.CHKDATE BETWEEN { d '" + start.ToString("yyyy'-'MM'-'dd") + "'} AND { d '" + end.ToString("yyyy'-'MM'-'dd") + "'} ) " +
+                "AND (PAY.EN = EMP.EN) )";
+            return getDataTable(selectString);
+        }
+
+        /// <summary>
+        /// 
+        /// <param name="rcvForm"></param>  = 
+        /// 1 = WO
+        /// 2 = Invoice
+        /// 3 = PO?
+        /// <returns></returns>
+        public DataTable getRCVDataTable(DateTime start, DateTime end, int rcvForm)
+        {
+            String selectString = "SELECT CST.CN, CST.NAME, RCV.ADR1, RCV.NAME, RCV.IN2, RCV.JDATE, RCV.COUNTER, RCVN.RCVNKey, RCVT.TECH, RCV.SUBTOTAL, RCV.TOTTAX, RCV.TOTTAX2, RCV.MAT, RCV.LAB, RCV.MATC, RCV.LABC " +
                 "FROM RCV, RCVT, RCVN, CST " +
                 "WHERE (" +
-                "(((((RCV.FRM = 1 ) AND (NOT((RCV.JSTAT = '*' )) OR (RCV.JSTAT IS NULL ))) " +
+                "(((((RCV.FRM = " + rcvForm + " ) AND (NOT((RCV.JSTAT = '*' )) OR (RCV.JSTAT IS NULL ))) " +
                 "AND (RCV.COUNTER = RCVT.RCVPK )) " +
                 "AND (RCVT.DATE BETWEEN {d '" + start.ToString("yyyy'-'MM'-'dd") + "'} AND {d '" + end.ToString("yyyy'-'MM'-'dd") + "'} ) ) " +
                 "AND ((RCV.\"IN\" = RCVN.\"IN\" ) AND (RCV.CN = RCVN.CN ))) " + "AND (CST.CN = RCV.CN ))";
 
+            return getDataTable(selectString);
+        }
+
+        public DataTable getDataTable(String selectString)
+        {
             SqlCommand command = new SqlCommand(selectString, cnn);
 
             SqlDataAdapter sda = new SqlDataAdapter();
@@ -125,6 +147,26 @@ namespace wintac_utils.dbconnect
             sda.Update(dataTable);
 
             return dataTable;
+        }
+
+        public DataTable getOutStandingWorkOrders(DateTime start, DateTime end)
+        {
+            return getRCVDataTable(start, end, 1);
+        }
+
+        public DataTable getInvoices(DateTime start, DateTime end)
+        {
+            return getRCVDataTable(start, end, 2);
+        }
+
+        public DataTable getPurchaseOrders(DateTime start, DateTime end)
+        {
+            return getRCVDataTable(start, end, 5);
+        }
+
+        public DataTable getProposals(DateTime start, DateTime end)
+        {
+            return getRCVDataTable(start, end, 3);
         }
 
 

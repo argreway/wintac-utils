@@ -40,7 +40,10 @@
             this.workOrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.outstandingWOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pongTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.calculateWOPerTechToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateInvoicesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updatePurchaseOrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateProposalsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.inputServer = new System.Windows.Forms.TextBox();
             this.inputDB = new System.Windows.Forms.TextBox();
@@ -57,7 +60,10 @@
             this.buttonFindReverse = new System.Windows.Forms.Button();
             this.textBoxInputFind = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.calculateWOPerTechToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.payrollToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.getPayrollTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updatePayrollToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.insertALLStatsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -70,6 +76,7 @@
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
             this.workOrdersToolStripMenuItem,
+            this.payrollToolStripMenuItem,
             this.statsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -154,23 +161,48 @@
             // statsToolStripMenuItem
             // 
             this.statsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.pongTestToolStripMenuItem,
-            this.calculateWOPerTechToolStripMenuItem});
+            this.calculateWOPerTechToolStripMenuItem,
+            this.updateInvoicesToolStripMenuItem,
+            this.updatePurchaseOrdersToolStripMenuItem,
+            this.updateProposalsToolStripMenuItem,
+            this.updatePayrollToolStripMenuItem,
+            this.insertALLStatsToolStripMenuItem});
             this.statsToolStripMenuItem.Name = "statsToolStripMenuItem";
             this.statsToolStripMenuItem.Size = new System.Drawing.Size(78, 38);
             this.statsToolStripMenuItem.Text = "Stats";
             // 
-            // pongTestToolStripMenuItem
+            // calculateWOPerTechToolStripMenuItem
             // 
-            this.pongTestToolStripMenuItem.Name = "pongTestToolStripMenuItem";
-            this.pongTestToolStripMenuItem.Size = new System.Drawing.Size(357, 38);
-            this.pongTestToolStripMenuItem.Text = "Test";
-            this.pongTestToolStripMenuItem.Click += new System.EventHandler(this.pongTestToolStripMenuItem_Click);
+            this.calculateWOPerTechToolStripMenuItem.Name = "calculateWOPerTechToolStripMenuItem";
+            this.calculateWOPerTechToolStripMenuItem.Size = new System.Drawing.Size(371, 38);
+            this.calculateWOPerTechToolStripMenuItem.Text = "Update Work Orders";
+            this.calculateWOPerTechToolStripMenuItem.Click += new System.EventHandler(this.calculateWOPerTechToolStripMenuItem_Click);
+            // 
+            // updateInvoicesToolStripMenuItem
+            // 
+            this.updateInvoicesToolStripMenuItem.Name = "updateInvoicesToolStripMenuItem";
+            this.updateInvoicesToolStripMenuItem.Size = new System.Drawing.Size(371, 38);
+            this.updateInvoicesToolStripMenuItem.Text = "Update Invoices";
+            this.updateInvoicesToolStripMenuItem.Click += new System.EventHandler(this.updateInvoices);
+            // 
+            // updatePurchaseOrdersToolStripMenuItem
+            // 
+            this.updatePurchaseOrdersToolStripMenuItem.Name = "updatePurchaseOrdersToolStripMenuItem";
+            this.updatePurchaseOrdersToolStripMenuItem.Size = new System.Drawing.Size(371, 38);
+            this.updatePurchaseOrdersToolStripMenuItem.Text = "Update Purchase Orders";
+            this.updatePurchaseOrdersToolStripMenuItem.Click += new System.EventHandler(this.updatePurchaseOrders);
+            // 
+            // updateProposalsToolStripMenuItem
+            // 
+            this.updateProposalsToolStripMenuItem.Name = "updateProposalsToolStripMenuItem";
+            this.updateProposalsToolStripMenuItem.Size = new System.Drawing.Size(371, 38);
+            this.updateProposalsToolStripMenuItem.Text = "Update Proposals";
+            this.updateProposalsToolStripMenuItem.Click += new System.EventHandler(this.updateProposals);
             // 
             // dataGridView1
             // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(0, 192);
@@ -263,7 +295,7 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoSize = true;
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
@@ -331,12 +363,33 @@
             this.label5.Text = "Find: ";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
-            // calculateWOPerTechToolStripMenuItem
+            // payrollToolStripMenuItem
             // 
-            this.calculateWOPerTechToolStripMenuItem.Name = "calculateWOPerTechToolStripMenuItem";
-            this.calculateWOPerTechToolStripMenuItem.Size = new System.Drawing.Size(357, 38);
-            this.calculateWOPerTechToolStripMenuItem.Text = "Calculate WO Per Tech";
-            this.calculateWOPerTechToolStripMenuItem.Click += new System.EventHandler(this.calculateWOPerTechToolStripMenuItem_Click);
+            this.payrollToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.getPayrollTableToolStripMenuItem});
+            this.payrollToolStripMenuItem.Name = "payrollToolStripMenuItem";
+            this.payrollToolStripMenuItem.Size = new System.Drawing.Size(98, 38);
+            this.payrollToolStripMenuItem.Text = "Payroll";
+            // 
+            // getPayrollTableToolStripMenuItem
+            // 
+            this.getPayrollTableToolStripMenuItem.Name = "getPayrollTableToolStripMenuItem";
+            this.getPayrollTableToolStripMenuItem.Size = new System.Drawing.Size(324, 38);
+            this.getPayrollTableToolStripMenuItem.Text = "Get Payroll Table";
+            // 
+            // updatePayrollToolStripMenuItem
+            // 
+            this.updatePayrollToolStripMenuItem.Name = "updatePayrollToolStripMenuItem";
+            this.updatePayrollToolStripMenuItem.Size = new System.Drawing.Size(371, 38);
+            this.updatePayrollToolStripMenuItem.Text = "Update Payroll";
+            this.updatePayrollToolStripMenuItem.Click += new System.EventHandler(this.updatePayrollToolStripMenuItem_Click);
+            // 
+            // insertALLStatsToolStripMenuItem
+            // 
+            this.insertALLStatsToolStripMenuItem.Name = "insertALLStatsToolStripMenuItem";
+            this.insertALLStatsToolStripMenuItem.Size = new System.Drawing.Size(371, 38);
+            this.insertALLStatsToolStripMenuItem.Text = "Insert ALL Stats";
+            this.insertALLStatsToolStripMenuItem.Click += new System.EventHandler(this.insertALLStatsToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -403,8 +456,14 @@
         private System.Windows.Forms.ToolStripMenuItem workOrdersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem outstandingWOToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem statsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pongTestToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem calculateWOPerTechToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem updateInvoicesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem updatePurchaseOrdersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem updateProposalsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem payrollToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem getPayrollTableToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem updatePayrollToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem insertALLStatsToolStripMenuItem;
     }
 }
 

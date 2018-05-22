@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using wintac_utils.main;
-using wintac_utils.workorders;
+using wintac_utils.wip;
 using wintac_utils.influxdb;
 
 namespace wintac_utils
@@ -207,7 +207,7 @@ namespace wintac_utils
 
         private void outstandingWOToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            WorkOrderUtils.getOutStandingWorkOrders();
+            WIPUtils.getOutStandingWorkOrders();
         }
 
         private void pongTestToolStripMenuItem_Click(object sender, EventArgs e)
@@ -222,7 +222,32 @@ namespace wintac_utils
 
         private void calculateWOPerTechToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            WorkOrderUtils.calculateOutstandingPerTech();
+            WIPUtils.insertWorkOrderStats();
+        }
+
+        private void updateInvoices(object sender, EventArgs e)
+        {
+            WIPUtils.insertInvoiceStats();
+        }
+
+        private void updatePurchaseOrders(object sender, EventArgs e)
+        {
+            WIPUtils.insertPurchaseOrders();
+        }
+
+        private void updateProposals(object sender, EventArgs e)
+        {
+            WIPUtils.insertProposalStats();
+        }
+
+        private void updatePayrollToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WIPUtils.insertPayrollStats();
+        }
+
+        private void insertALLStatsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WIPUtils.insertAllStats();
         }
     }
 }
