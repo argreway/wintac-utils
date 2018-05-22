@@ -39,11 +39,15 @@
             this.searchCustomerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.workOrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.outstandingWOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.payrollToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.getPayrollTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.calculateWOPerTechToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateInvoicesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updatePurchaseOrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateProposalsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updatePayrollToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.insertALLStatsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.inputServer = new System.Windows.Forms.TextBox();
             this.inputDB = new System.Windows.Forms.TextBox();
@@ -60,10 +64,9 @@
             this.buttonFindReverse = new System.Windows.Forms.Button();
             this.textBoxInputFind = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.payrollToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.getPayrollTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.updatePayrollToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.insertALLStatsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.influxDBAdminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createDBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dropDBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -77,7 +80,8 @@
             this.editToolStripMenuItem,
             this.workOrdersToolStripMenuItem,
             this.payrollToolStripMenuItem,
-            this.statsToolStripMenuItem});
+            this.statsToolStripMenuItem,
+            this.influxDBAdminToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1614, 42);
@@ -158,6 +162,20 @@
             this.outstandingWOToolStripMenuItem.Text = "Outstanding WO";
             this.outstandingWOToolStripMenuItem.Click += new System.EventHandler(this.outstandingWOToolStripMenuItem_Click);
             // 
+            // payrollToolStripMenuItem
+            // 
+            this.payrollToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.getPayrollTableToolStripMenuItem});
+            this.payrollToolStripMenuItem.Name = "payrollToolStripMenuItem";
+            this.payrollToolStripMenuItem.Size = new System.Drawing.Size(98, 38);
+            this.payrollToolStripMenuItem.Text = "Payroll";
+            // 
+            // getPayrollTableToolStripMenuItem
+            // 
+            this.getPayrollTableToolStripMenuItem.Name = "getPayrollTableToolStripMenuItem";
+            this.getPayrollTableToolStripMenuItem.Size = new System.Drawing.Size(294, 38);
+            this.getPayrollTableToolStripMenuItem.Text = "Get Payroll Table";
+            // 
             // statsToolStripMenuItem
             // 
             this.statsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -198,6 +216,20 @@
             this.updateProposalsToolStripMenuItem.Size = new System.Drawing.Size(371, 38);
             this.updateProposalsToolStripMenuItem.Text = "Update Proposals";
             this.updateProposalsToolStripMenuItem.Click += new System.EventHandler(this.updateProposals);
+            // 
+            // updatePayrollToolStripMenuItem
+            // 
+            this.updatePayrollToolStripMenuItem.Name = "updatePayrollToolStripMenuItem";
+            this.updatePayrollToolStripMenuItem.Size = new System.Drawing.Size(371, 38);
+            this.updatePayrollToolStripMenuItem.Text = "Update Payroll";
+            this.updatePayrollToolStripMenuItem.Click += new System.EventHandler(this.updatePayrollToolStripMenuItem_Click);
+            // 
+            // insertALLStatsToolStripMenuItem
+            // 
+            this.insertALLStatsToolStripMenuItem.Name = "insertALLStatsToolStripMenuItem";
+            this.insertALLStatsToolStripMenuItem.Size = new System.Drawing.Size(371, 38);
+            this.insertALLStatsToolStripMenuItem.Text = "Insert ALL Stats";
+            this.insertALLStatsToolStripMenuItem.Click += new System.EventHandler(this.insertALLStatsToolStripMenuItem_Click);
             // 
             // dataGridView1
             // 
@@ -363,33 +395,28 @@
             this.label5.Text = "Find: ";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
-            // payrollToolStripMenuItem
+            // influxDBAdminToolStripMenuItem
             // 
-            this.payrollToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.getPayrollTableToolStripMenuItem});
-            this.payrollToolStripMenuItem.Name = "payrollToolStripMenuItem";
-            this.payrollToolStripMenuItem.Size = new System.Drawing.Size(98, 38);
-            this.payrollToolStripMenuItem.Text = "Payroll";
+            this.influxDBAdminToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.createDBToolStripMenuItem,
+            this.dropDBToolStripMenuItem});
+            this.influxDBAdminToolStripMenuItem.Name = "influxDBAdminToolStripMenuItem";
+            this.influxDBAdminToolStripMenuItem.Size = new System.Drawing.Size(117, 38);
+            this.influxDBAdminToolStripMenuItem.Text = "InfluxDB";
             // 
-            // getPayrollTableToolStripMenuItem
+            // createDBToolStripMenuItem
             // 
-            this.getPayrollTableToolStripMenuItem.Name = "getPayrollTableToolStripMenuItem";
-            this.getPayrollTableToolStripMenuItem.Size = new System.Drawing.Size(324, 38);
-            this.getPayrollTableToolStripMenuItem.Text = "Get Payroll Table";
+            this.createDBToolStripMenuItem.Name = "createDBToolStripMenuItem";
+            this.createDBToolStripMenuItem.Size = new System.Drawing.Size(324, 38);
+            this.createDBToolStripMenuItem.Text = "Create DB";
+            this.createDBToolStripMenuItem.Click += new System.EventHandler(this.createDBToolStripMenuItem_Click);
             // 
-            // updatePayrollToolStripMenuItem
+            // dropDBToolStripMenuItem
             // 
-            this.updatePayrollToolStripMenuItem.Name = "updatePayrollToolStripMenuItem";
-            this.updatePayrollToolStripMenuItem.Size = new System.Drawing.Size(371, 38);
-            this.updatePayrollToolStripMenuItem.Text = "Update Payroll";
-            this.updatePayrollToolStripMenuItem.Click += new System.EventHandler(this.updatePayrollToolStripMenuItem_Click);
-            // 
-            // insertALLStatsToolStripMenuItem
-            // 
-            this.insertALLStatsToolStripMenuItem.Name = "insertALLStatsToolStripMenuItem";
-            this.insertALLStatsToolStripMenuItem.Size = new System.Drawing.Size(371, 38);
-            this.insertALLStatsToolStripMenuItem.Text = "Insert ALL Stats";
-            this.insertALLStatsToolStripMenuItem.Click += new System.EventHandler(this.insertALLStatsToolStripMenuItem_Click);
+            this.dropDBToolStripMenuItem.Name = "dropDBToolStripMenuItem";
+            this.dropDBToolStripMenuItem.Size = new System.Drawing.Size(324, 38);
+            this.dropDBToolStripMenuItem.Text = "Drop DB";
+            this.dropDBToolStripMenuItem.Click += new System.EventHandler(this.dropDBToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -464,6 +491,9 @@
         private System.Windows.Forms.ToolStripMenuItem getPayrollTableToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updatePayrollToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem insertALLStatsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem influxDBAdminToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createDBToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dropDBToolStripMenuItem;
     }
 }
 

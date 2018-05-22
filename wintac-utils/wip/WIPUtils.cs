@@ -14,17 +14,32 @@ namespace wintac_utils.wip
 {
     class WIPUtils
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         //protected static DateTime start = new DateTime(2018, 4, 1);
+        //protected static DateTime end = new DateTime(2018, 5, 31);
         protected static DateTime start = new DateTime(2010, 1, 1);
-        protected static DateTime end = new DateTime(2018, 5, 31);
+        protected static DateTime end = DateTime.Now;
 
         public static void insertAllStats()
         {
+            String message = "Inserting all stats from " + start + " to " + end;
+            log.Info(message);
+            MessageBox.Show(message);
+
+            InfluxdbClient.dropDB();
+            InfluxdbClient.createDB();
+
             insertInvoiceStats();
+            log.Info("Finished invoices.");
             insertWorkOrderStats();
+            log.Info("Finished wo.");
             insertProposalStats();
+            log.Info("Finished props.");
             insertPurchaseOrders();
+            log.Info("Finished po.");
             insertPayrollStats();
+            log.Info("Finished pay.");
         }
 
         public static void getOutStandingWorkOrders()

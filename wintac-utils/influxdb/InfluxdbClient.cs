@@ -11,6 +11,7 @@ namespace wintac_utils.influxdb
 {
     class InfluxdbClient
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public enum MEASUREMENT
         {
@@ -36,6 +37,19 @@ namespace wintac_utils.influxdb
         protected static String INFLUX_DB_URL = "http://192.168.1.30:8086";
         protected static String INFLUX_DB = "sentry_stats_time";
         protected static InfluxManager manager = new InfluxManager(INFLUX_DB_URL, INFLUX_DB);
+
+        public async static void dropDB()
+        {
+            log.Info("Dropping influxdb " + INFLUX_DB);
+            await manager.Query("drop database " + INFLUX_DB);
+        }
+
+        public async static void createDB()
+        {
+            log.Info("Creating influxdb " + INFLUX_DB);
+            await manager.Query("create database " + INFLUX_DB);
+        }
+
 
         public async static void testInfluxDBClient()
         {
@@ -95,6 +109,5 @@ namespace wintac_utils.influxdb
         {
             await manager.Write(measurements);
         }
-
     }
 }

@@ -249,5 +249,15 @@ namespace wintac_utils
         {
             WIPUtils.insertAllStats();
         }
+
+        private void createDBToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InfluxdbClient.createDB();
+        }
+
+        private void dropDBToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InfluxdbClient.dropDB();
+        }
     }
 }
