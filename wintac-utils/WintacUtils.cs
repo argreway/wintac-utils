@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceProcess;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using wintac_utils.main;
@@ -18,18 +19,33 @@ namespace wintac_utils
         static void Main(string[] args)
         {
             log.Info("Wintac-utils starting...");
+            bool isConsole = true;
 
-            if (args != null && args.Length > 0)
+            try
             {
-                string arg = args[0];
-                if (arg == "-bg")
-                {
-                    log.Info("Running in back ground mode.");
-                    StatsTimer st = new StatsTimer();
-                    st.RunTimer();
-                    Environment.Exit(0);
-                }
+                if (Environment.UserInteractive)
+                    log.Info("Starting console application...");
+                else
+                    isConsole = false;
             }
+            catch (Exception e)
+            {
+                isConsole = false;
+            }
+
+            if (!isConsole)
+            {
+                log.Info("Running in service mode.");
+                ServiceBase[] ServicesToRun;
+                ServicesToRun = new ServiceBase[]
+                      {
+                        new WintacUtilsService()
+                      };
+                ServiceBase.Run(ServicesToRun);
+                return;
+            }
+
+            log.Info("Running windows form mode.");
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

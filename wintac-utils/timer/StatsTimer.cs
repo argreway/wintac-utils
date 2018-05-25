@@ -12,45 +12,45 @@ namespace wintac_utils.timer
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        StateObjClass StateObj = new StateObjClass();
+
         private class StateObjClass
         {
-            // Used to hold parameters for calls to TimerTask.  
-            public int SomeValue;
             public System.Threading.Timer TimerReference;
             public bool TimerCanceled;
         }
 
+        long delay = 900000;
+        long interval = 43200000;
+
         public void RunTimer()
         {
-            StateObjClass StateObj = new StateObjClass();
             StateObj.TimerCanceled = false;
-            StateObj.SomeValue = 1;
+
             System.Threading.TimerCallback TimerDelegate =
                 new System.Threading.TimerCallback(TimerTask);
 
+            // Start timer run every 12 hours
+            log.Info("Starting timer with delay: " + delay + ", interval: " + interval);
             System.Threading.Timer TimerItem =
-                new System.Threading.Timer(TimerDelegate, StateObj, 43200000, 43200000);
+                    new System.Threading.Timer(TimerDelegate, StateObj, delay, interval);
 
-            // Save a reference for Dispose.  
             StateObj.TimerReference = TimerItem;
 
-            System.Threading.Thread.Sleep(1000000000);
+            //System.Threading.Thread.Sleep(1000000000);
+        }
 
-            StateObj.TimerCanceled = true;
+        public void CancelTimer()
+        {
+            StateObjClass State = (StateObjClass)StateObj;
+            State.TimerReference.Dispose();
+            log.Info("Disposed of timer.");
         }
 
         private void TimerTask(object StateObj)
         {
-            StateObjClass State = (StateObjClass)StateObj;
-
             log.Info("Timer fired updating stats...");
-            //WIPUtils.insertAllStats();
-
-            if (State.TimerCanceled)
-            {
-                State.TimerReference.Dispose();
-                System.Diagnostics.Debug.WriteLine("Done  " + DateTime.Now.ToString());
-            }
+            WIPUtils.insertAllStats();
         }
 
     }

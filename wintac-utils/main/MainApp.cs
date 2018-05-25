@@ -12,6 +12,7 @@ namespace wintac_utils.main
         protected static DBConnection dbConnection;
         protected static MainForm mainForm;
         protected static SearchBox boxForm;
+        protected static ProgressBar progressBarUC;
         protected static WintacUtilsProperties utilsProperties;
 
         public static void initalize()
@@ -20,6 +21,8 @@ namespace wintac_utils.main
             dbConnection = new DBConnection();
             mainForm = new MainForm();
             boxForm = new SearchBox();
+            progressBarUC = new ProgressBar();
+            //progressBarUC.Visible = true;
         }
 
         public static DBConnection GetDBConnection()
@@ -35,6 +38,11 @@ namespace wintac_utils.main
         public static SearchBox GetSearchBox()
         {
             return boxForm;
+        }
+
+        public static ProgressBar GetProgressBar()
+        {
+            return progressBarUC;
         }
 
         public static WintacUtilsProperties getProperties()

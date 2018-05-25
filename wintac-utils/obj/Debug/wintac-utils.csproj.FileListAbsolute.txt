@@ -43,3 +43,4 @@ C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\bin\Debug\InfluxClient.d
 C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\bin\Debug\log4net.dll
 C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\bin\Debug\log4net.xml
 C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\obj\Debug\wintac-utils.csprojResolveAssemblyReference.cache
+C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\obj\Debug\wintac_utils.ProjectInstaller.resources

@@ -27,6 +27,9 @@ namespace wintac_utils.wip
             log.Info(message);
             MessageBox.Show(message);
 
+            //  MainApp.GetProgressBar().Visible = true;
+            // MainApp.GetProgressBar().Enabled = true;
+
             InfluxdbClient.dropDB();
             InfluxdbClient.createDB();
 
@@ -40,6 +43,10 @@ namespace wintac_utils.wip
             log.Info("Finished po.");
             insertPayrollStats();
             log.Info("Finished pay.");
+            System.Threading.Thread.Sleep(5000);
+
+            //MainApp.GetProgressBar().Enabled = false;
+            //MainApp.GetProgressBar().Visible = false;
         }
 
         public static void getOutStandingWorkOrders()
