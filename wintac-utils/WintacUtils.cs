@@ -33,6 +33,9 @@ namespace wintac_utils
                 isConsole = false;
             }
 
+            MainApp.SetConsole(isConsole);
+            MainApp.initalizeService();
+
             if (!isConsole)
             {
                 log.Info("Running in service mode.");
@@ -50,7 +53,7 @@ namespace wintac_utils
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            MainApp.initalize();
+            MainApp.initalizeForms();
 
             Application.Run(MainApp.getMainForm());
         }

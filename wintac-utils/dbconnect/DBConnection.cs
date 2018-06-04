@@ -12,23 +12,29 @@ namespace wintac_utils.dbconnect
 {
     class DBConnection
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         protected SqlConnection cnn;
 
         public String connectToDB(String server, String db, String user, String password)
         {
-            string connetionString = null;
+            string connectionString = null;
             //connetionString = "Server=192.168.1.34\\WINTACSQL;Database=SENTRY4-4-2018;User ID=argreway;Password=Sniper13!";
             //String escServer = server.Split('\\').Join(' ');
-            connetionString = "Server=" + server + ";Database=" + db + ";User ID=" + user + ";Password=" + password;
-            cnn = new SqlConnection(connetionString);
+            connectionString = "Server=" + server + ";Database=" + db + ";User ID=" + user + ";Password=" + password;
+            log.Info("Connecting to the DB: " + connectionString);
+            cnn = new SqlConnection(connectionString);
             try
             {
                 cnn.Open();
+                log.Info("Connection was successful!");
                 return "Connection was successful! ";
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Can not open connection ! " + ex);
+                log.Error("Can not open connection !", ex);
+                if (MainApp.GetConsole())
+                    MessageBox.Show("Can not open connection ! " + ex);
             }
             return null;
         }
@@ -119,7 +125,7 @@ namespace wintac_utils.dbconnect
         /// <returns></returns>
         public DataTable getRCVDataTable(DateTime start, DateTime end, int rcvForm)
         {
-            String selectString = "SELECT CST.CN, CST.NAME, RCV.ADR1, RCV.NAME, RCV.IN2, RCV.JDATE, RCV.COUNTER, RCVN.RCVNKey, RCVT.TECH, RCV.SUBTOTAL, RCV.TOTTAX, RCV.TOTTAX2, RCV.MAT, RCV.LAB, RCV.MATC, RCV.LABC " +
+            String selectString = "SELECT CST.CN, CST.NAME, RCV.ADR1, RCV.INVRMK, RCV.DEPT, RCV.NAME, RCV.IN2, RCV.JDATE, RCV.COUNTER, RCVN.RCVNKey, RCVT.TECH, RCV.SUBTOTAL, RCV.TOTTAX, RCV.TOTTAX2, RCV.MAT, RCV.LAB, RCV.MATC, RCV.LABC " +
                 "FROM RCV, RCVT, RCVN, CST " +
                 "WHERE (" +
                 "(((((RCV.FRM = " + rcvForm + " ) AND (NOT((RCV.JSTAT = '*' )) OR (RCV.JSTAT IS NULL ))) " +
@@ -130,8 +136,34 @@ namespace wintac_utils.dbconnect
             return getDataTable(selectString);
         }
 
+        public DataTable getARDataTable(DateTime end)
+        {
+            String selectString =
+            "Select RCV.CN, RCV.[IN], RCV.IN2, RCV.[NAME],RCV.DEPT, RCV.MISC1, RCV.INVRMK, RCV.FRM, RCV.INVDATE, RCV.SUBTOTAL," +
+            "RCV.TOTTAX, RCV.TOTTAX2, RCV.TOTTAX3, RCV.TOTTAX4, RCV.TOTTAX5, RCV.MISC1, RCV.PDUE, RCV.INVRMK, " +
+            "RCV.DUEDATE, RCV.BALANCE, CST.[EMAIL], CST.[EMAIL2], CST.[NAME] AS CSTNAME, CST.[FNAME] AS CSTFNAME, CST.[TEL] AS CSTTEL," +
+            " ISNULL(" +
+            " (select SUM(ISNULL(RCT.AMOUNT, 0))" +
+            "       + SUM(ISNULL(RCT.TAXPD, 0))" +
+            "       + SUM(ISNULL(RCT.DISC, 0))" +
+            "   from RCT" +
+            "   where ((RCT.CN = RCV.CN and RCT.[IN] = RCV.[IN])) " +
+            "   And(DateDiff(\"D\", RCT.[DATE], '" + end.ToString("yyyy'-'MM'-'dd") + "') >= 0)" +
+            "    ), 0) AS RECEIPTS_PAID_AMOUNT FROM RCV" +
+            "    INNER JOIN CST ON RCV.CN = CST.CN" +
+            "      Where((RCV.FRM = 2)  " +
+            //"      AND(RCV.[DEPT] LIKE 'CO SPRINGS%') " +
+            "      AND(RCV.[INVDATE] <= '" + end.ToString("yyyy'-'MM'-'dd") + "')" +
+            "      And((RCV.SUBTOTAL + RCV.TOTTAX + RCV.TOTTAX2 + RCV.TOTTAX3 + RCV.TOTTAX4 + RCV.TOTTAX5) - (ISNULL((select SUM(ISNULL(RCT.AMOUNT, 0))+ SUM(ISNULL(RCT.TAXPD, 0))+SUM(ISNULL(RCT.DISC, 0)) from RCT where((RCT.CN= RCV.CN and RCT.[IN]= RCV.[IN])) " +
+            "      And(DateDiff(\"D\", RCT.[DATE], '" + end.ToString("yyyy'-'MM'-'dd") + "') >= 0)), 0)) <> 0) ) Order by RCV.INVDATE, RCV.[NAME]";
+
+            return getDataTable(selectString);
+        }
+
         public DataTable getDataTable(String selectString)
         {
+            log.Info("GetDataTable selectString: " + selectString);
+
             SqlCommand command = new SqlCommand(selectString, cnn);
 
             SqlDataAdapter sda = new SqlDataAdapter();
@@ -140,11 +172,14 @@ namespace wintac_utils.dbconnect
             DataTable dataTable = new DataTable();
             sda.Fill(dataTable);
 
-            BindingSource bsource = new BindingSource();
-            bsource.DataSource = dataTable;
+            if (MainApp.GetConsole())
+            {
+                BindingSource bsource = new BindingSource();
+                bsource.DataSource = dataTable;
 
-            MainApp.getMainForm().GetDataGridView().DataSource = bsource;
-            sda.Update(dataTable);
+                MainApp.getMainForm().GetDataGridView().DataSource = bsource;
+                sda.Update(dataTable);
+            }
 
             return dataTable;
         }

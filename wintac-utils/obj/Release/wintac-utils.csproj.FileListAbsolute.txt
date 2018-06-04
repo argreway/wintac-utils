@@ -44,3 +44,4 @@ C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\obj\Release\wintac-utils
 C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\obj\Release\wintac-utils.csproj.CopyComplete
 C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\obj\Release\wintac-utils.exe
 C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\obj\Release\wintac-utils.pdb
+C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\obj\Release\wintac-utils.csprojResolveAssemblyReference.cache

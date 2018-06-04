@@ -48,6 +48,9 @@
             this.updateProposalsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updatePayrollToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.insertALLStatsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.influxDBAdminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createDBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dropDBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.inputServer = new System.Windows.Forms.TextBox();
             this.inputDB = new System.Windows.Forms.TextBox();
@@ -64,9 +67,7 @@
             this.buttonFindReverse = new System.Windows.Forms.Button();
             this.textBoxInputFind = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.influxDBAdminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createDBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dropDBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateARToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -184,6 +185,7 @@
             this.updatePurchaseOrdersToolStripMenuItem,
             this.updateProposalsToolStripMenuItem,
             this.updatePayrollToolStripMenuItem,
+            this.updateARToolStripMenuItem,
             this.insertALLStatsToolStripMenuItem});
             this.statsToolStripMenuItem.Name = "statsToolStripMenuItem";
             this.statsToolStripMenuItem.Size = new System.Drawing.Size(78, 38);
@@ -231,10 +233,33 @@
             this.insertALLStatsToolStripMenuItem.Text = "Insert ALL Stats";
             this.insertALLStatsToolStripMenuItem.Click += new System.EventHandler(this.insertALLStatsToolStripMenuItem_Click);
             // 
+            // influxDBAdminToolStripMenuItem
+            // 
+            this.influxDBAdminToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.createDBToolStripMenuItem,
+            this.dropDBToolStripMenuItem});
+            this.influxDBAdminToolStripMenuItem.Name = "influxDBAdminToolStripMenuItem";
+            this.influxDBAdminToolStripMenuItem.Size = new System.Drawing.Size(117, 38);
+            this.influxDBAdminToolStripMenuItem.Text = "InfluxDB";
+            // 
+            // createDBToolStripMenuItem
+            // 
+            this.createDBToolStripMenuItem.Name = "createDBToolStripMenuItem";
+            this.createDBToolStripMenuItem.Size = new System.Drawing.Size(221, 38);
+            this.createDBToolStripMenuItem.Text = "Create DB";
+            this.createDBToolStripMenuItem.Click += new System.EventHandler(this.createDBToolStripMenuItem_Click);
+            // 
+            // dropDBToolStripMenuItem
+            // 
+            this.dropDBToolStripMenuItem.Name = "dropDBToolStripMenuItem";
+            this.dropDBToolStripMenuItem.Size = new System.Drawing.Size(221, 38);
+            this.dropDBToolStripMenuItem.Text = "Drop DB";
+            this.dropDBToolStripMenuItem.Click += new System.EventHandler(this.dropDBToolStripMenuItem_Click);
+            // 
             // dataGridView1
             // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(0, 192);
@@ -327,7 +352,7 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoSize = true;
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
@@ -395,28 +420,12 @@
             this.label5.Text = "Find: ";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
-            // influxDBAdminToolStripMenuItem
+            // updateARToolStripMenuItem
             // 
-            this.influxDBAdminToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.createDBToolStripMenuItem,
-            this.dropDBToolStripMenuItem});
-            this.influxDBAdminToolStripMenuItem.Name = "influxDBAdminToolStripMenuItem";
-            this.influxDBAdminToolStripMenuItem.Size = new System.Drawing.Size(117, 38);
-            this.influxDBAdminToolStripMenuItem.Text = "InfluxDB";
-            // 
-            // createDBToolStripMenuItem
-            // 
-            this.createDBToolStripMenuItem.Name = "createDBToolStripMenuItem";
-            this.createDBToolStripMenuItem.Size = new System.Drawing.Size(324, 38);
-            this.createDBToolStripMenuItem.Text = "Create DB";
-            this.createDBToolStripMenuItem.Click += new System.EventHandler(this.createDBToolStripMenuItem_Click);
-            // 
-            // dropDBToolStripMenuItem
-            // 
-            this.dropDBToolStripMenuItem.Name = "dropDBToolStripMenuItem";
-            this.dropDBToolStripMenuItem.Size = new System.Drawing.Size(324, 38);
-            this.dropDBToolStripMenuItem.Text = "Drop DB";
-            this.dropDBToolStripMenuItem.Click += new System.EventHandler(this.dropDBToolStripMenuItem_Click);
+            this.updateARToolStripMenuItem.Name = "updateARToolStripMenuItem";
+            this.updateARToolStripMenuItem.Size = new System.Drawing.Size(371, 38);
+            this.updateARToolStripMenuItem.Text = "Update AR";
+            this.updateARToolStripMenuItem.Click += new System.EventHandler(this.updateARToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -494,6 +503,7 @@
         private System.Windows.Forms.ToolStripMenuItem influxDBAdminToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem createDBToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dropDBToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem updateARToolStripMenuItem;
     }
 }
 

@@ -259,5 +259,10 @@ namespace wintac_utils
         {
             InfluxdbClient.dropDB();
         }
+
+        private void updateARToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WIPUtils.insertARStats();
+        }
     }
 }

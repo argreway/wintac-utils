@@ -9,20 +9,35 @@ namespace wintac_utils.main
 {
     class MainApp
     {
+        protected static bool isConsole = true;
+
         protected static DBConnection dbConnection;
         protected static MainForm mainForm;
         protected static SearchBox boxForm;
         protected static ProgressBar progressBarUC;
         protected static WintacUtilsProperties utilsProperties;
 
-        public static void initalize()
+        public static void initalizeForms()
         {
-            utilsProperties = new WintacUtilsProperties();
-            dbConnection = new DBConnection();
             mainForm = new MainForm();
             boxForm = new SearchBox();
             progressBarUC = new ProgressBar();
-            //progressBarUC.Visible = true;
+        }
+
+        public static void initalizeService()
+        {
+            utilsProperties = new WintacUtilsProperties();
+            dbConnection = new DBConnection();
+        }
+
+        public static bool GetConsole()
+        {
+            return isConsole;
+        }
+
+        public static void SetConsole(bool console)
+        {
+            isConsole = console;
         }
 
         public static DBConnection GetDBConnection()

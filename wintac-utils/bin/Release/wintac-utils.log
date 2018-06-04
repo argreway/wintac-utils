@@ -1,5 +1,141 @@
-2018-05-24 20:21:57,329 [1] INFO wintac_utils.WintacUtils - Wintac-utils starting...
-2018-05-24 20:21:57,341 [1] INFO wintac_utils.WintacUtils - Running in service mode.
-2018-05-24 20:21:57,345 [4] INFO wintac_utils.WintacUtilsService - Starting wintac-utils service.
-2018-05-24 20:23:00,398 [5] INFO wintac_utils.WintacUtilsService - Stopping wintac-utils service.
-2018-05-24 20:23:00,399 [5] INFO wintac_utils.timer.StatsTimer - Disposed of timer.
+2018-05-28 07:56:38,296 [1] INFO wintac_utils.WintacUtils - Wintac-utils starting...
+2018-05-28 07:56:38,311 [1] INFO wintac_utils.WintacUtils - Starting console application...
+2018-05-28 07:56:38,311 [1] INFO wintac_utils.WintacUtils - Running windows form mode.
+2018-05-28 07:56:38,421 [1] INFO wintac_utils.dbconnect.DBConnection - Connecting to the DB: Server=192.168.1.34\WINTACSQL;Database=SENTRY4-4-2018;User ID=argreway;Password=Sniper13!
+2018-05-28 07:56:38,859 [1] INFO wintac_utils.dbconnect.DBConnection - Connection was successful!
+2018-05-28 07:57:02,219 [1] INFO wintac_utils.wip.WIPUtils - Inserting all stats from 1/1/2010 12:00:00 AM to 7/27/2018 7:57:02 AM
+2018-05-28 07:57:03,577 [1] INFO wintac_utils.influxdb.InfluxdbClient - Dropping influxdb sentry_stats_time
+2018-05-28 07:57:04,124 [1] INFO wintac_utils.influxdb.InfluxdbClient - Got reponse: {"results":[{"statement_id":0,"series":[{"name":"databases","columns":["name"],"values":[["_internal"],["sentry_stats_time"]]}]}]}
+
+2018-05-28 07:57:04,124 [1] ERROR wintac_utils.influxdb.InfluxdbClient - DB: not dropped reattempting...
+2018-05-28 07:57:04,124 [1] INFO wintac_utils.influxdb.InfluxdbClient - Waiting for drop...
+2018-05-28 07:57:06,218 [1] INFO wintac_utils.influxdb.InfluxdbClient - Got reponse: {"results":[{"statement_id":0,"series":[{"name":"databases","columns":["name"],"values":[["_internal"]]}]}]}
+
+2018-05-28 07:57:08,234 [1] INFO wintac_utils.influxdb.InfluxdbClient - Dropped influxdb sentry_stats_time
+2018-05-28 07:57:08,234 [1] INFO wintac_utils.influxdb.InfluxdbClient - Creating influxdb sentry_stats_time
+2018-05-28 07:57:08,311 [1] INFO wintac_utils.influxdb.InfluxdbClient - Got reponse: {"results":[{"statement_id":0}]}
+
+2018-05-28 07:57:08,406 [1] INFO wintac_utils.influxdb.InfluxdbClient - Got reponse: {"results":[{"statement_id":0,"series":[{"name":"databases","columns":["name"],"values":[["_internal"],["sentry_stats_time"]]}]}]}
+
+2018-05-28 07:57:10,421 [1] INFO wintac_utils.influxdb.InfluxdbClient - Created influxdb db. 
+2018-05-28 07:57:10,421 [1] INFO wintac_utils.dbconnect.DBConnection - GetDataTable selectString: SELECT CST.CN, CST.NAME, RCV.ADR1, RCV.INVRMK, RCV.DEPT, RCV.NAME, RCV.IN2, RCV.JDATE, RCV.COUNTER, RCVN.RCVNKey, RCVT.TECH, RCV.SUBTOTAL, RCV.TOTTAX, RCV.TOTTAX2, RCV.MAT, RCV.LAB, RCV.MATC, RCV.LABC FROM RCV, RCVT, RCVN, CST WHERE ((((((RCV.FRM = 2 ) AND (NOT((RCV.JSTAT = '*' )) OR (RCV.JSTAT IS NULL ))) AND (RCV.COUNTER = RCVT.RCVPK )) AND (RCVT.DATE BETWEEN {d '2010-01-01'} AND {d '2018-07-27'} ) ) AND ((RCV."IN" = RCVN."IN" ) AND (RCV.CN = RCVN.CN ))) AND (CST.CN = RCV.CN ))
+2018-05-28 07:57:25,468 [1] INFO wintac_utils.influxdb.InfluxdbClient - BEGIN: Writting bulk measurements [71360]
+2018-05-28 07:57:27,156 [1] INFO wintac_utils.influxdb.InfluxdbClient - END: writting bulk measurements [71360]
+2018-05-28 07:57:27,156 [1] INFO wintac_utils.wip.WIPUtils - Finished invoices.
+2018-05-28 07:57:27,156 [1] INFO wintac_utils.dbconnect.DBConnection - GetDataTable selectString: SELECT CST.CN, CST.NAME, RCV.ADR1, RCV.INVRMK, RCV.DEPT, RCV.NAME, RCV.IN2, RCV.JDATE, RCV.COUNTER, RCVN.RCVNKey, RCVT.TECH, RCV.SUBTOTAL, RCV.TOTTAX, RCV.TOTTAX2, RCV.MAT, RCV.LAB, RCV.MATC, RCV.LABC FROM RCV, RCVT, RCVN, CST WHERE ((((((RCV.FRM = 1 ) AND (NOT((RCV.JSTAT = '*' )) OR (RCV.JSTAT IS NULL ))) AND (RCV.COUNTER = RCVT.RCVPK )) AND (RCVT.DATE BETWEEN {d '2010-01-01'} AND {d '2018-07-27'} ) ) AND ((RCV."IN" = RCVN."IN" ) AND (RCV.CN = RCVN.CN ))) AND (CST.CN = RCV.CN ))
+2018-05-28 07:57:32,343 [1] INFO wintac_utils.influxdb.InfluxdbClient - BEGIN: Writting bulk measurements [16849]
+2018-05-28 07:57:32,655 [1] INFO wintac_utils.influxdb.InfluxdbClient - END: writting bulk measurements [16849]
+2018-05-28 07:57:32,655 [1] INFO wintac_utils.wip.WIPUtils - Finished wo.
+2018-05-28 07:57:32,655 [1] INFO wintac_utils.dbconnect.DBConnection - GetDataTable selectString: SELECT CST.CN, CST.NAME, RCV.ADR1, RCV.INVRMK, RCV.DEPT, RCV.NAME, RCV.IN2, RCV.JDATE, RCV.COUNTER, RCVN.RCVNKey, RCVT.TECH, RCV.SUBTOTAL, RCV.TOTTAX, RCV.TOTTAX2, RCV.MAT, RCV.LAB, RCV.MATC, RCV.LABC FROM RCV, RCVT, RCVN, CST WHERE ((((((RCV.FRM = 3 ) AND (NOT((RCV.JSTAT = '*' )) OR (RCV.JSTAT IS NULL ))) AND (RCV.COUNTER = RCVT.RCVPK )) AND (RCVT.DATE BETWEEN {d '2010-01-01'} AND {d '2018-07-27'} ) ) AND ((RCV."IN" = RCVN."IN" ) AND (RCV.CN = RCVN.CN ))) AND (CST.CN = RCV.CN ))
+2018-05-28 07:57:33,343 [1] INFO wintac_utils.influxdb.InfluxdbClient - BEGIN: Writting bulk measurements [1580]
+2018-05-28 07:57:33,359 [1] INFO wintac_utils.influxdb.InfluxdbClient - END: writting bulk measurements [1580]
+2018-05-28 07:57:33,359 [1] INFO wintac_utils.wip.WIPUtils - Finished props.
+2018-05-28 07:57:33,359 [1] INFO wintac_utils.dbconnect.DBConnection - GetDataTable selectString: SELECT CST.CN, CST.NAME, RCV.ADR1, RCV.INVRMK, RCV.DEPT, RCV.NAME, RCV.IN2, RCV.JDATE, RCV.COUNTER, RCVN.RCVNKey, RCVT.TECH, RCV.SUBTOTAL, RCV.TOTTAX, RCV.TOTTAX2, RCV.MAT, RCV.LAB, RCV.MATC, RCV.LABC FROM RCV, RCVT, RCVN, CST WHERE ((((((RCV.FRM = 5 ) AND (NOT((RCV.JSTAT = '*' )) OR (RCV.JSTAT IS NULL ))) AND (RCV.COUNTER = RCVT.RCVPK )) AND (RCVT.DATE BETWEEN {d '2010-01-01'} AND {d '2018-07-27'} ) ) AND ((RCV."IN" = RCVN."IN" ) AND (RCV.CN = RCVN.CN ))) AND (CST.CN = RCV.CN ))
+2018-05-28 07:57:33,686 [1] INFO wintac_utils.influxdb.InfluxdbClient - BEGIN: Writting bulk measurements [283]
+2018-05-28 07:57:33,686 [1] INFO wintac_utils.influxdb.InfluxdbClient - END: writting bulk measurements [283]
+2018-05-28 07:57:33,686 [1] INFO wintac_utils.wip.WIPUtils - Finished po.
+2018-05-28 07:57:33,686 [1] INFO wintac_utils.dbconnect.DBConnection - GetDataTable selectString: SELECT PAY.EN , PAY.NAME , PAY.CHKNUM , PAY.CHKDATE , PAY.NHOURS , PAY.OHOURS , PAY.SHOURS , PAY.VHOURS , PAY.HOURS5 , PAY.HOURS6 , PAY.HOURS7 , PAY.HOURS8 , PAY.HOURS9 , PAY.HOURS10 , PAY.GROSS , PAY.TIPS , PAY.FED_WH , PAY.ST_WH , PAY.LOC_WH , PAY.SOC , PAY.MED , PAY.BEN , PAY.ATSAV , PAY.BTSAV , PAY.REIMB , PAY.MISC1 , PAY.DED5 , PAY.DED6 , PAY.DED7 , PAY.DED8 , PAY.DED9 , PAY.DED10 , PAY.SDI , PAY.FLI , PAY.SUI FROM PAY, EMP WHERE((PAY.CHKDATE BETWEEN { d '2010-01-01'} AND { d '2018-07-27'} ) AND (PAY.EN = EMP.EN) )
+2018-05-28 07:57:41,828 [1] INFO wintac_utils.influxdb.InfluxdbClient - BEGIN: Writting bulk measurements [11368]
+2018-05-28 07:57:42,127 [1] INFO wintac_utils.influxdb.InfluxdbClient - END: writting bulk measurements [11368]
+2018-05-28 07:57:42,127 [1] INFO wintac_utils.wip.WIPUtils - Finished pay.
+2018-05-31 15:55:26,574 [1] INFO wintac_utils.WintacUtils - Wintac-utils starting...
+2018-05-31 15:55:26,603 [1] INFO wintac_utils.WintacUtils - Starting console application...
+2018-05-31 15:55:26,606 [1] INFO wintac_utils.WintacUtils - Running windows form mode.
+2018-05-31 15:55:26,903 [1] INFO wintac_utils.dbconnect.DBConnection - Connecting to the DB: Server=192.168.1.34\WINTACSQL;Database=SENTRY4-4-2018;User ID=argreway;Password=Sniper13!
+2018-05-31 15:55:27,191 [1] INFO wintac_utils.dbconnect.DBConnection - Connection was successful!
+2018-05-31 15:55:33,040 [1] INFO wintac_utils.wip.WIPUtils - Inserting all stats from 1/1/2010 12:00:00 AM to 7/30/2018 3:55:33 PM
+2018-05-31 15:55:35,087 [1] INFO wintac_utils.influxdb.InfluxdbClient - Dropping influxdb sentry_stats_time
+2018-05-31 15:55:37,697 [1] INFO wintac_utils.influxdb.InfluxdbClient - Got reponse: {"results":[{"statement_id":0,"series":[{"name":"databases","columns":["name"],"values":[["_internal"],["sentry_stats_time"]]}]}]}
+
+2018-05-31 15:55:37,697 [1] ERROR wintac_utils.influxdb.InfluxdbClient - DB: not dropped reattempting...
+2018-05-31 15:55:37,697 [1] INFO wintac_utils.influxdb.InfluxdbClient - Waiting for drop...
+2018-05-31 15:55:39,728 [1] INFO wintac_utils.influxdb.InfluxdbClient - Got reponse: {"results":[{"statement_id":0,"series":[{"name":"databases","columns":["name"],"values":[["_internal"]]}]}]}
+
+2018-05-31 15:55:41,744 [1] INFO wintac_utils.influxdb.InfluxdbClient - Dropped influxdb sentry_stats_time
+2018-05-31 15:55:41,744 [1] INFO wintac_utils.influxdb.InfluxdbClient - Creating influxdb sentry_stats_time
+2018-05-31 15:55:41,790 [1] INFO wintac_utils.influxdb.InfluxdbClient - Got reponse: {"results":[{"statement_id":0}]}
+
+2018-05-31 15:55:41,806 [1] INFO wintac_utils.influxdb.InfluxdbClient - Got reponse: {"results":[{"statement_id":0,"series":[{"name":"databases","columns":["name"],"values":[["_internal"],["sentry_stats_time"]]}]}]}
+
+2018-05-31 15:55:43,822 [1] INFO wintac_utils.influxdb.InfluxdbClient - Created influxdb db. 
+2018-05-31 15:55:43,837 [1] INFO wintac_utils.dbconnect.DBConnection - GetDataTable selectString: SELECT CST.CN, CST.NAME, RCV.ADR1, RCV.INVRMK, RCV.DEPT, RCV.NAME, RCV.IN2, RCV.JDATE, RCV.COUNTER, RCVN.RCVNKey, RCVT.TECH, RCV.SUBTOTAL, RCV.TOTTAX, RCV.TOTTAX2, RCV.MAT, RCV.LAB, RCV.MATC, RCV.LABC FROM RCV, RCVT, RCVN, CST WHERE ((((((RCV.FRM = 2 ) AND (NOT((RCV.JSTAT = '*' )) OR (RCV.JSTAT IS NULL ))) AND (RCV.COUNTER = RCVT.RCVPK )) AND (RCVT.DATE BETWEEN {d '2010-01-01'} AND {d '2018-07-30'} ) ) AND ((RCV."IN" = RCVN."IN" ) AND (RCV.CN = RCVN.CN ))) AND (CST.CN = RCV.CN ))
+2018-05-31 15:55:52,103 [1] INFO wintac_utils.influxdb.InfluxdbClient - BEGIN: Writting bulk measurements [71523]
+2018-05-31 15:55:56,478 [1] INFO wintac_utils.influxdb.InfluxdbClient - END: writting bulk measurements [71523]
+2018-05-31 15:55:56,478 [1] INFO wintac_utils.wip.WIPUtils - Finished invoices.
+2018-05-31 15:55:56,478 [1] INFO wintac_utils.dbconnect.DBConnection - GetDataTable selectString: SELECT CST.CN, CST.NAME, RCV.ADR1, RCV.INVRMK, RCV.DEPT, RCV.NAME, RCV.IN2, RCV.JDATE, RCV.COUNTER, RCVN.RCVNKey, RCVT.TECH, RCV.SUBTOTAL, RCV.TOTTAX, RCV.TOTTAX2, RCV.MAT, RCV.LAB, RCV.MATC, RCV.LABC FROM RCV, RCVT, RCVN, CST WHERE ((((((RCV.FRM = 1 ) AND (NOT((RCV.JSTAT = '*' )) OR (RCV.JSTAT IS NULL ))) AND (RCV.COUNTER = RCVT.RCVPK )) AND (RCVT.DATE BETWEEN {d '2010-01-01'} AND {d '2018-07-30'} ) ) AND ((RCV."IN" = RCVN."IN" ) AND (RCV.CN = RCVN.CN ))) AND (CST.CN = RCV.CN ))
+2018-05-31 15:55:59,165 [1] INFO wintac_utils.influxdb.InfluxdbClient - BEGIN: Writting bulk measurements [16830]
+2018-05-31 15:56:01,025 [1] INFO wintac_utils.influxdb.InfluxdbClient - END: writting bulk measurements [16830]
+2018-05-31 15:56:01,025 [1] INFO wintac_utils.wip.WIPUtils - Finished wo.
+2018-05-31 15:56:01,025 [1] INFO wintac_utils.dbconnect.DBConnection - GetDataTable selectString: SELECT CST.CN, CST.NAME, RCV.ADR1, RCV.INVRMK, RCV.DEPT, RCV.NAME, RCV.IN2, RCV.JDATE, RCV.COUNTER, RCVN.RCVNKey, RCVT.TECH, RCV.SUBTOTAL, RCV.TOTTAX, RCV.TOTTAX2, RCV.MAT, RCV.LAB, RCV.MATC, RCV.LABC FROM RCV, RCVT, RCVN, CST WHERE ((((((RCV.FRM = 3 ) AND (NOT((RCV.JSTAT = '*' )) OR (RCV.JSTAT IS NULL ))) AND (RCV.COUNTER = RCVT.RCVPK )) AND (RCVT.DATE BETWEEN {d '2010-01-01'} AND {d '2018-07-30'} ) ) AND ((RCV."IN" = RCVN."IN" ) AND (RCV.CN = RCVN.CN ))) AND (CST.CN = RCV.CN ))
+2018-05-31 15:56:01,572 [1] INFO wintac_utils.influxdb.InfluxdbClient - BEGIN: Writting bulk measurements [1586]
+2018-05-31 15:56:01,651 [1] INFO wintac_utils.influxdb.InfluxdbClient - END: writting bulk measurements [1586]
+2018-05-31 15:56:01,651 [1] INFO wintac_utils.wip.WIPUtils - Finished props.
+2018-05-31 15:56:01,651 [1] INFO wintac_utils.dbconnect.DBConnection - GetDataTable selectString: SELECT CST.CN, CST.NAME, RCV.ADR1, RCV.INVRMK, RCV.DEPT, RCV.NAME, RCV.IN2, RCV.JDATE, RCV.COUNTER, RCVN.RCVNKey, RCVT.TECH, RCV.SUBTOTAL, RCV.TOTTAX, RCV.TOTTAX2, RCV.MAT, RCV.LAB, RCV.MATC, RCV.LABC FROM RCV, RCVT, RCVN, CST WHERE ((((((RCV.FRM = 5 ) AND (NOT((RCV.JSTAT = '*' )) OR (RCV.JSTAT IS NULL ))) AND (RCV.COUNTER = RCVT.RCVPK )) AND (RCVT.DATE BETWEEN {d '2010-01-01'} AND {d '2018-07-30'} ) ) AND ((RCV."IN" = RCVN."IN" ) AND (RCV.CN = RCVN.CN ))) AND (CST.CN = RCV.CN ))
+2018-05-31 15:56:01,806 [1] INFO wintac_utils.influxdb.InfluxdbClient - BEGIN: Writting bulk measurements [283]
+2018-05-31 15:56:01,822 [1] INFO wintac_utils.influxdb.InfluxdbClient - END: writting bulk measurements [283]
+2018-05-31 15:56:01,822 [1] INFO wintac_utils.wip.WIPUtils - Finished po.
+2018-05-31 15:56:01,822 [1] INFO wintac_utils.dbconnect.DBConnection - GetDataTable selectString: SELECT PAY.EN , PAY.NAME , PAY.CHKNUM , PAY.CHKDATE , PAY.NHOURS , PAY.OHOURS , PAY.SHOURS , PAY.VHOURS , PAY.HOURS5 , PAY.HOURS6 , PAY.HOURS7 , PAY.HOURS8 , PAY.HOURS9 , PAY.HOURS10 , PAY.GROSS , PAY.TIPS , PAY.FED_WH , PAY.ST_WH , PAY.LOC_WH , PAY.SOC , PAY.MED , PAY.BEN , PAY.ATSAV , PAY.BTSAV , PAY.REIMB , PAY.MISC1 , PAY.DED5 , PAY.DED6 , PAY.DED7 , PAY.DED8 , PAY.DED9 , PAY.DED10 , PAY.SDI , PAY.FLI , PAY.SUI FROM PAY, EMP WHERE((PAY.CHKDATE BETWEEN { d '2010-01-01'} AND { d '2018-07-30'} ) AND (PAY.EN = EMP.EN) )
+2018-05-31 15:56:05,119 [1] INFO wintac_utils.influxdb.InfluxdbClient - BEGIN: Writting bulk measurements [11399]
+2018-05-31 15:56:08,166 [1] INFO wintac_utils.influxdb.InfluxdbClient - END: writting bulk measurements [11399]
+2018-05-31 15:56:08,166 [1] INFO wintac_utils.wip.WIPUtils - Finished pay.
+2018-05-31 15:57:09,749 [1] INFO wintac_utils.WintacUtils - Wintac-utils starting...
+2018-05-31 15:57:09,766 [1] INFO wintac_utils.WintacUtils - Starting console application...
+2018-05-31 15:57:09,769 [1] INFO wintac_utils.WintacUtils - Running windows form mode.
+2018-05-31 15:57:09,892 [1] INFO wintac_utils.dbconnect.DBConnection - Connecting to the DB: Server=192.168.1.34\WINTACSQL;Database=SENTRY4-4-2018;User ID=argreway;Password=Sniper13!
+2018-05-31 15:57:10,056 [1] INFO wintac_utils.dbconnect.DBConnection - Connection was successful!
+2018-05-31 15:57:16,968 [1] INFO wintac_utils.dbconnect.DBConnection - GetDataTable selectString: Select RCV.CN, RCV.[IN], RCV.IN2, RCV.[NAME], RCV.MISC1, RCV.INVRMK, RCV.FRM, RCV.INVDATE, RCV.SUBTOTAL,RCV.TOTTAX, RCV.TOTTAX2, RCV.TOTTAX3, RCV.TOTTAX4, RCV.TOTTAX5, RCV.MISC1, RCV.PDUE, RCV.INVRMK, RCV.DUEDATE, RCV.BALANCE, CST.[NAME] AS CSTNAME, CST.[FNAME] AS CSTFNAME, CST.[TEL] AS CSTTEL, ISNULL( (select SUM(ISNULL(RCT.AMOUNT, 0))       + SUM(ISNULL(RCT.TAXPD, 0))       + SUM(ISNULL(RCT.DISC, 0))   from RCT   where ((RCT.CN = RCV.CN and RCT.[IN] = RCV.[IN]))    And(DateDiff("D", RCT.[DATE], '2018-05-31') >= 0)    ), 0) AS RECEIPTS_PAID_AMOUNT FROM RCV    INNER JOIN CST ON RCV.CN = CST.CN      Where((RCV.FRM = 2)  AND(RCV.[DEPT] LIKE 'CO SPRINGS%') AND(RCV.[INVDATE] <= '2018-05-31')      And((RCV.SUBTOTAL + RCV.TOTTAX + RCV.TOTTAX2 + RCV.TOTTAX3 + RCV.TOTTAX4 + RCV.TOTTAX5) - (ISNULL((select SUM(ISNULL(RCT.AMOUNT, 0))+ SUM(ISNULL(RCT.TAXPD, 0))+SUM(ISNULL(RCT.DISC, 0)) from RCT where((RCT.CN= RCV.CN and RCT.[IN]= RCV.[IN]))       And(DateDiff("D", RCT.[DATE], '2018-05-31') >= 0)), 0)) <> 0) ) Order by RCV.INVDATE, RCV.[NAME]
+2018-05-31 15:57:18,000 [1] INFO wintac_utils.influxdb.InfluxdbClient - BEGIN: Writting bulk measurements [827]
+2018-05-31 15:57:18,093 [1] INFO wintac_utils.influxdb.InfluxdbClient - END: writting bulk measurements [827]
+2018-05-31 16:01:21,412 [1] INFO wintac_utils.WintacUtils - Wintac-utils starting...
+2018-05-31 16:01:21,428 [1] INFO wintac_utils.WintacUtils - Starting console application...
+2018-05-31 16:01:21,443 [1] INFO wintac_utils.WintacUtils - Running windows form mode.
+2018-05-31 16:01:21,521 [1] INFO wintac_utils.dbconnect.DBConnection - Connecting to the DB: Server=192.168.1.34\WINTACSQL;Database=SENTRY4-4-2018;User ID=argreway;Password=Sniper13!
+2018-05-31 16:01:21,599 [1] INFO wintac_utils.dbconnect.DBConnection - Connection was successful!
+2018-05-31 16:01:51,959 [1] INFO wintac_utils.dbconnect.DBConnection - GetDataTable selectString: Select RCV.CN, RCV.[IN], RCV.IN2, RCV.[NAME], RCV.MISC1, RCV.INVRMK, RCV.FRM, RCV.INVDATE, RCV.SUBTOTAL,RCV.TOTTAX, RCV.TOTTAX2, RCV.TOTTAX3, RCV.TOTTAX4, RCV.TOTTAX5, RCV.MISC1, RCV.PDUE, RCV.INVRMK, RCV.DUEDATE, RCV.BALANCE, CST.[NAME] AS CSTNAME, CST.[FNAME] AS CSTFNAME, CST.[TEL] AS CSTTEL, ISNULL( (select SUM(ISNULL(RCT.AMOUNT, 0))       + SUM(ISNULL(RCT.TAXPD, 0))       + SUM(ISNULL(RCT.DISC, 0))   from RCT   where ((RCT.CN = RCV.CN and RCT.[IN] = RCV.[IN]))    And(DateDiff("D", RCT.[DATE], '2018-05-31') >= 0)    ), 0) AS RECEIPTS_PAID_AMOUNT FROM RCV    INNER JOIN CST ON RCV.CN = CST.CN      Where((RCV.FRM = 2)  AND(RCV.[DEPT] LIKE 'CO SPRINGS%') AND(RCV.[INVDATE] <= '2018-05-31')      And((RCV.SUBTOTAL + RCV.TOTTAX + RCV.TOTTAX2 + RCV.TOTTAX3 + RCV.TOTTAX4 + RCV.TOTTAX5) - (ISNULL((select SUM(ISNULL(RCT.AMOUNT, 0))+ SUM(ISNULL(RCT.TAXPD, 0))+SUM(ISNULL(RCT.DISC, 0)) from RCT where((RCT.CN= RCV.CN and RCT.[IN]= RCV.[IN]))       And(DateDiff("D", RCT.[DATE], '2018-05-31') >= 0)), 0)) <> 0) ) Order by RCV.INVDATE, RCV.[NAME]
+2018-05-31 16:01:52,819 [1] INFO wintac_utils.influxdb.InfluxdbClient - BEGIN: Writting bulk measurements [827]
+2018-05-31 16:01:52,912 [1] INFO wintac_utils.influxdb.InfluxdbClient - END: writting bulk measurements [827]
+2018-05-31 16:31:28,799 [1] INFO wintac_utils.WintacUtils - Wintac-utils starting...
+2018-05-31 16:31:28,842 [1] INFO wintac_utils.WintacUtils - Starting console application...
+2018-05-31 16:31:28,845 [1] INFO wintac_utils.WintacUtils - Running windows form mode.
+2018-05-31 16:31:28,976 [1] INFO wintac_utils.dbconnect.DBConnection - Connecting to the DB: Server=192.168.1.34\WINTACSQL;Database=SENTRY4-4-2018;User ID=argreway;Password=Sniper13!
+2018-05-31 16:31:29,208 [1] INFO wintac_utils.dbconnect.DBConnection - Connection was successful!
+2018-05-31 16:31:44,006 [1] INFO wintac_utils.dbconnect.DBConnection - GetDataTable selectString: Select RCV.CN, RCV.[IN], RCV.IN2, RCV.[NAME],RCV.DEPT, RCV.MISC1, RCV.INVRMK, RCV.FRM, RCV.INVDATE, RCV.SUBTOTAL,RCV.TOTTAX, RCV.TOTTAX2, RCV.TOTTAX3, RCV.TOTTAX4, RCV.TOTTAX5, RCV.MISC1, RCV.PDUE, RCV.INVRMK, RCV.DUEDATE, RCV.BALANCE, CST.[EMAIL], CST.[NAME] AS CSTNAME, CST.[FNAME] AS CSTFNAME, CST.[TEL] AS CSTTEL, ISNULL( (select SUM(ISNULL(RCT.AMOUNT, 0))       + SUM(ISNULL(RCT.TAXPD, 0))       + SUM(ISNULL(RCT.DISC, 0))   from RCT   where ((RCT.CN = RCV.CN and RCT.[IN] = RCV.[IN]))    And(DateDiff("D", RCT.[DATE], '2018-05-31') >= 0)    ), 0) AS RECEIPTS_PAID_AMOUNT FROM RCV    INNER JOIN CST ON RCV.CN = CST.CN      Where((RCV.FRM = 2)  AND(RCV.[DEPT] LIKE 'CO SPRINGS%') AND(RCV.[INVDATE] <= '2018-05-31')      And((RCV.SUBTOTAL + RCV.TOTTAX + RCV.TOTTAX2 + RCV.TOTTAX3 + RCV.TOTTAX4 + RCV.TOTTAX5) - (ISNULL((select SUM(ISNULL(RCT.AMOUNT, 0))+ SUM(ISNULL(RCT.TAXPD, 0))+SUM(ISNULL(RCT.DISC, 0)) from RCT where((RCT.CN= RCV.CN and RCT.[IN]= RCV.[IN]))       And(DateDiff("D", RCT.[DATE], '2018-05-31') >= 0)), 0)) <> 0) ) Order by RCV.INVDATE, RCV.[NAME]
+2018-05-31 16:31:45,131 [1] INFO wintac_utils.influxdb.InfluxdbClient - BEGIN: Writting bulk measurements [827]
+2018-05-31 16:31:45,240 [1] INFO wintac_utils.influxdb.InfluxdbClient - END: writting bulk measurements [827]
+2018-05-31 16:33:22,842 [1] INFO wintac_utils.WintacUtils - Wintac-utils starting...
+2018-05-31 16:33:22,858 [1] INFO wintac_utils.WintacUtils - Starting console application...
+2018-05-31 16:33:22,858 [1] INFO wintac_utils.WintacUtils - Running windows form mode.
+2018-05-31 16:33:22,983 [1] INFO wintac_utils.dbconnect.DBConnection - Connecting to the DB: Server=192.168.1.34\WINTACSQL;Database=SENTRY4-4-2018;User ID=argreway;Password=Sniper13!
+2018-05-31 16:33:23,092 [1] INFO wintac_utils.dbconnect.DBConnection - Connection was successful!
+2018-05-31 16:34:20,693 [1] INFO wintac_utils.WintacUtils - Wintac-utils starting...
+2018-05-31 16:34:20,708 [1] INFO wintac_utils.WintacUtils - Starting console application...
+2018-05-31 16:34:20,712 [1] INFO wintac_utils.WintacUtils - Running windows form mode.
+2018-05-31 16:34:20,765 [1] INFO wintac_utils.dbconnect.DBConnection - Connecting to the DB: Server=192.168.1.34\WINTACSQL;Database=SENTRY4-4-2018;User ID=argreway;Password=Sniper13!
+2018-05-31 16:34:21,007 [1] INFO wintac_utils.dbconnect.DBConnection - Connection was successful!
+2018-05-31 16:34:25,987 [1] INFO wintac_utils.dbconnect.DBConnection - GetDataTable selectString: Select RCV.CN, RCV.[IN], RCV.IN2, RCV.[NAME],RCV.DEPT, RCV.MISC1, RCV.INVRMK, RCV.FRM, RCV.INVDATE, RCV.SUBTOTAL,RCV.TOTTAX, RCV.TOTTAX2, RCV.TOTTAX3, RCV.TOTTAX4, RCV.TOTTAX5, RCV.MISC1, RCV.PDUE, RCV.INVRMK, RCV.DUEDATE, RCV.BALANCE, CST.[EMAIL], CST.[EMAIL2], CST.[NAME] AS CSTNAME, CST.[FNAME] AS CSTFNAME, CST.[TEL] AS CSTTEL, ISNULL( (select SUM(ISNULL(RCT.AMOUNT, 0))       + SUM(ISNULL(RCT.TAXPD, 0))       + SUM(ISNULL(RCT.DISC, 0))   from RCT   where ((RCT.CN = RCV.CN and RCT.[IN] = RCV.[IN]))    And(DateDiff("D", RCT.[DATE], '2018-05-31') >= 0)    ), 0) AS RECEIPTS_PAID_AMOUNT FROM RCV    INNER JOIN CST ON RCV.CN = CST.CN      Where((RCV.FRM = 2)        AND(RCV.[INVDATE] <= '2018-05-31')      And((RCV.SUBTOTAL + RCV.TOTTAX + RCV.TOTTAX2 + RCV.TOTTAX3 + RCV.TOTTAX4 + RCV.TOTTAX5) - (ISNULL((select SUM(ISNULL(RCT.AMOUNT, 0))+ SUM(ISNULL(RCT.TAXPD, 0))+SUM(ISNULL(RCT.DISC, 0)) from RCT where((RCT.CN= RCV.CN and RCT.[IN]= RCV.[IN]))       And(DateDiff("D", RCT.[DATE], '2018-05-31') >= 0)), 0)) <> 0) ) Order by RCV.INVDATE, RCV.[NAME]
+2018-05-31 16:34:32,879 [1] INFO wintac_utils.influxdb.InfluxdbClient - BEGIN: Writting bulk measurements [13255]
+2018-05-31 16:34:33,222 [1] INFO wintac_utils.influxdb.InfluxdbClient - END: writting bulk measurements [13255]
+2018-06-01 07:18:01,250 [1] INFO wintac_utils.WintacUtils - Wintac-utils starting...
+2018-06-01 07:18:01,266 [1] INFO wintac_utils.WintacUtils - Starting console application...
+2018-06-01 07:18:01,266 [1] INFO wintac_utils.WintacUtils - Running windows form mode.
+2018-06-01 07:18:01,485 [1] INFO wintac_utils.dbconnect.DBConnection - Connecting to the DB: Server=192.168.1.34\WINTACSQL;Database=SENTRY4-4-2018;User ID=argreway;Password=Sniper13!
+2018-06-01 07:18:02,078 [1] INFO wintac_utils.dbconnect.DBConnection - Connection was successful!
+2018-06-01 07:18:07,423 [1] INFO wintac_utils.dbconnect.DBConnection - GetDataTable selectString: Select RCV.CN, RCV.[IN], RCV.IN2, RCV.[NAME],RCV.DEPT, RCV.MISC1, RCV.INVRMK, RCV.FRM, RCV.INVDATE, RCV.SUBTOTAL,RCV.TOTTAX, RCV.TOTTAX2, RCV.TOTTAX3, RCV.TOTTAX4, RCV.TOTTAX5, RCV.MISC1, RCV.PDUE, RCV.INVRMK, RCV.DUEDATE, RCV.BALANCE, CST.[EMAIL], CST.[EMAIL2], CST.[NAME] AS CSTNAME, CST.[FNAME] AS CSTFNAME, CST.[TEL] AS CSTTEL, ISNULL( (select SUM(ISNULL(RCT.AMOUNT, 0))       + SUM(ISNULL(RCT.TAXPD, 0))       + SUM(ISNULL(RCT.DISC, 0))   from RCT   where ((RCT.CN = RCV.CN and RCT.[IN] = RCV.[IN]))    And(DateDiff("D", RCT.[DATE], '2018-06-01') >= 0)    ), 0) AS RECEIPTS_PAID_AMOUNT FROM RCV    INNER JOIN CST ON RCV.CN = CST.CN      Where((RCV.FRM = 2)        AND(RCV.[INVDATE] <= '2018-06-01')      And((RCV.SUBTOTAL + RCV.TOTTAX + RCV.TOTTAX2 + RCV.TOTTAX3 + RCV.TOTTAX4 + RCV.TOTTAX5) - (ISNULL((select SUM(ISNULL(RCT.AMOUNT, 0))+ SUM(ISNULL(RCT.TAXPD, 0))+SUM(ISNULL(RCT.DISC, 0)) from RCT where((RCT.CN= RCV.CN and RCT.[IN]= RCV.[IN]))       And(DateDiff("D", RCT.[DATE], '2018-06-01') >= 0)), 0)) <> 0) ) Order by RCV.INVDATE, RCV.[NAME]
+2018-06-01 07:18:14,641 [1] INFO wintac_utils.influxdb.InfluxdbClient - BEGIN: Writting bulk measurements [13184]
+2018-06-01 07:18:15,329 [1] INFO wintac_utils.influxdb.InfluxdbClient - END: writting bulk measurements [13184]
+2018-06-01 14:33:06,666 [1] INFO wintac_utils.WintacUtils - Wintac-utils starting...
+2018-06-01 14:33:06,920 [1] INFO wintac_utils.WintacUtils - Starting console application...
+2018-06-01 14:33:07,201 [1] INFO wintac_utils.WintacUtils - Running windows form mode.
+2018-06-01 14:33:08,682 [1] INFO wintac_utils.dbconnect.DBConnection - Connecting to the DB: Server=192.168.1.34\WINTACSQL;Database=SENTRY4-4-2018;User ID=argreway;Password=Sniper13!
+2018-06-01 14:33:09,463 [1] INFO wintac_utils.dbconnect.DBConnection - Connection was successful!
+2018-06-01 14:33:13,641 [1] INFO wintac_utils.dbconnect.DBConnection - GetDataTable selectString: Select RCV.CN, RCV.[IN], RCV.IN2, RCV.[NAME],RCV.DEPT, RCV.MISC1, RCV.INVRMK, RCV.FRM, RCV.INVDATE, RCV.SUBTOTAL,RCV.TOTTAX, RCV.TOTTAX2, RCV.TOTTAX3, RCV.TOTTAX4, RCV.TOTTAX5, RCV.MISC1, RCV.PDUE, RCV.INVRMK, RCV.DUEDATE, RCV.BALANCE, CST.[EMAIL], CST.[EMAIL2], CST.[NAME] AS CSTNAME, CST.[FNAME] AS CSTFNAME, CST.[TEL] AS CSTTEL, ISNULL( (select SUM(ISNULL(RCT.AMOUNT, 0))       + SUM(ISNULL(RCT.TAXPD, 0))       + SUM(ISNULL(RCT.DISC, 0))   from RCT   where ((RCT.CN = RCV.CN and RCT.[IN] = RCV.[IN]))    And(DateDiff("D", RCT.[DATE], '2018-06-01') >= 0)    ), 0) AS RECEIPTS_PAID_AMOUNT FROM RCV    INNER JOIN CST ON RCV.CN = CST.CN      Where((RCV.FRM = 2)        AND(RCV.[INVDATE] <= '2018-06-01')      And((RCV.SUBTOTAL + RCV.TOTTAX + RCV.TOTTAX2 + RCV.TOTTAX3 + RCV.TOTTAX4 + RCV.TOTTAX5) - (ISNULL((select SUM(ISNULL(RCT.AMOUNT, 0))+ SUM(ISNULL(RCT.TAXPD, 0))+SUM(ISNULL(RCT.DISC, 0)) from RCT where((RCT.CN= RCV.CN and RCT.[IN]= RCV.[IN]))       And(DateDiff("D", RCT.[DATE], '2018-06-01') >= 0)), 0)) <> 0) ) Order by RCV.INVDATE, RCV.[NAME]
+2018-06-01 14:33:21,510 [1] INFO wintac_utils.influxdb.InfluxdbClient - BEGIN: Writting bulk measurements [13197]
+2018-06-01 14:33:22,291 [1] INFO wintac_utils.influxdb.InfluxdbClient - END: writting bulk measurements [13197]
+2018-06-03 20:44:30,564 [1] INFO wintac_utils.WintacUtils - Wintac-utils starting...
+2018-06-03 20:44:30,588 [1] INFO wintac_utils.WintacUtils - Starting console application...
+2018-06-03 20:44:30,592 [1] INFO wintac_utils.WintacUtils - Running windows form mode.
+2018-06-03 20:44:30,775 [1] INFO wintac_utils.dbconnect.DBConnection - Connecting to the DB: Server=192.168.1.34\WINTACSQL;Database=SENTRY4-4-2018;User ID=argreway;Password=Sniper13!
+2018-06-03 20:44:31,467 [1] INFO wintac_utils.dbconnect.DBConnection - Connection was successful!
+2018-06-03 20:44:37,061 [1] INFO wintac_utils.dbconnect.DBConnection - GetDataTable selectString: Select RCV.CN, RCV.[IN], RCV.IN2, RCV.[NAME],RCV.DEPT, RCV.MISC1, RCV.INVRMK, RCV.FRM, RCV.INVDATE, RCV.SUBTOTAL,RCV.TOTTAX, RCV.TOTTAX2, RCV.TOTTAX3, RCV.TOTTAX4, RCV.TOTTAX5, RCV.MISC1, RCV.PDUE, RCV.INVRMK, RCV.DUEDATE, RCV.BALANCE, CST.[EMAIL], CST.[EMAIL2], CST.[NAME] AS CSTNAME, CST.[FNAME] AS CSTFNAME, CST.[TEL] AS CSTTEL, ISNULL( (select SUM(ISNULL(RCT.AMOUNT, 0))       + SUM(ISNULL(RCT.TAXPD, 0))       + SUM(ISNULL(RCT.DISC, 0))   from RCT   where ((RCT.CN = RCV.CN and RCT.[IN] = RCV.[IN]))    And(DateDiff("D", RCT.[DATE], '2018-06-03') >= 0)    ), 0) AS RECEIPTS_PAID_AMOUNT FROM RCV    INNER JOIN CST ON RCV.CN = CST.CN      Where((RCV.FRM = 2)        AND(RCV.[INVDATE] <= '2018-06-03')      And((RCV.SUBTOTAL + RCV.TOTTAX + RCV.TOTTAX2 + RCV.TOTTAX3 + RCV.TOTTAX4 + RCV.TOTTAX5) - (ISNULL((select SUM(ISNULL(RCT.AMOUNT, 0))+ SUM(ISNULL(RCT.TAXPD, 0))+SUM(ISNULL(RCT.DISC, 0)) from RCT where((RCT.CN= RCV.CN and RCT.[IN]= RCV.[IN]))       And(DateDiff("D", RCT.[DATE], '2018-06-03') >= 0)), 0)) <> 0) ) Order by RCV.INVDATE, RCV.[NAME]
+2018-06-03 20:44:47,030 [1] INFO wintac_utils.influxdb.InfluxdbClient - BEGIN: Writting bulk measurements [13180]
+2018-06-03 20:44:47,826 [1] INFO wintac_utils.influxdb.InfluxdbClient - END: writting bulk measurements [13180]

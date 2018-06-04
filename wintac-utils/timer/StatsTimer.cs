@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using wintac_utils.main;
 using wintac_utils.wip;
 
 namespace wintac_utils.timer
@@ -27,6 +28,11 @@ namespace wintac_utils.timer
         {
             StateObj.TimerCanceled = false;
 
+            MainApp.GetDBConnection().connectToDB(MainApp.getProperties().getServer(),
+             MainApp.getProperties().getDatabase(),
+             MainApp.getProperties().getUser(),
+             MainApp.getProperties().getPassword());
+
             System.Threading.TimerCallback TimerDelegate =
                 new System.Threading.TimerCallback(TimerTask);
 
@@ -36,8 +42,6 @@ namespace wintac_utils.timer
                     new System.Threading.Timer(TimerDelegate, StateObj, delay, interval);
 
             StateObj.TimerReference = TimerItem;
-
-            //System.Threading.Thread.Sleep(1000000000);
         }
 
         public void CancelTimer()
@@ -50,7 +54,14 @@ namespace wintac_utils.timer
         private void TimerTask(object StateObj)
         {
             log.Info("Timer fired updating stats...");
-            WIPUtils.insertAllStats();
+            try
+            {
+                WIPUtils.insertAllStats();
+            }
+            catch (Exception e)
+            {
+                log.Error("Failed to insert all stats: ", e);
+            }
         }
 
     }

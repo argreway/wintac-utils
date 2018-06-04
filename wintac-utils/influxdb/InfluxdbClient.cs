@@ -19,17 +19,21 @@ namespace wintac_utils.influxdb
             INV,
             PO,
             PROP,
-            PAY
+            PAY,
+            AR
         }
 
         public enum COL
         {
             TECH,
             JDATE,
+            INVDATE,
             CHKDATE
         }
 
         public static List<String> WIP_FIELDS = new List<String> { "SUBTOTAL", "TOTTAX", "TOTTAX2", "MAT", "LAB", "MATC", "LABC" };
+        public static List<String> AR_FIELDS = new List<String> { "SUBTOTAL", "TOTTAX", "TOTTAX2", "MAT", "LAB", "MATC", "LABC",
+            "BALANCE","RECEIPTS_PAID_AMOUNT" };
         public static List<String> PAY_FIELDS = new List<String> { "NHOURS ", "OHOURS ", "SHOURS ", "VHOURS ", "HOURS5 ", "HOURS6 ",
             "HOURS7 ", "HOURS8 ", "HOURS9 ", "HOURS10 ", "GROSS" , "TIPS ", "FED_WH ", "ST_WH ", "LOC_WH ", "SOC ", "MED ", "BEN ",
             "ATSAV ", "BTSAV ", "REIMB ", "MISC1 ", "DED5 ", "DED6 ", "DED7 ", "DED8 ", "DED9 ", "DED10 ", "SDI ", "FLI ", "SUI" };
@@ -38,16 +42,94 @@ namespace wintac_utils.influxdb
         protected static String INFLUX_DB = "sentry_stats_time";
         protected static InfluxManager manager = new InfluxManager(INFLUX_DB_URL, INFLUX_DB);
 
-        public async static void dropDB()
+        private static readonly HttpClient client = new HttpClient();
+
+        private static Dictionary<string, string> values = new Dictionary<string, string>
         {
-            log.Info("Dropping influxdb " + INFLUX_DB);
-            await manager.Query("drop database " + INFLUX_DB);
+             { "t", "v" },
+             { "t2", "v2" }
+        };
+
+        private static int dropRetries = 0;
+        public static void dropDB()
+        {
+            Task<HttpResponseMessage> response;
+            Task<String> responseString;
+
+            if (dropRetries % 5 == 0)
+            {
+                log.Info("Dropping influxdb " + INFLUX_DB);
+                manager.Query("drop database " + INFLUX_DB);
+            }
+            else
+            {
+                log.Info("Waiting for drop...");
+                System.Threading.Thread.Sleep(2000);
+            }
+
+            response = client.GetAsync(INFLUX_DB_URL + "/query?q=SHOW DATABASES");
+            responseString = response.Result.Content.ReadAsStringAsync();
+            log.Info("Got reponse: " + responseString.Result);
+            if (responseString.Result.Contains(INFLUX_DB))
+            {
+                log.Error("DB: not dropped reattempting...");
+                dropRetries++;
+                dropDB();
+            }
+            else
+            {
+                System.Threading.Thread.Sleep(2000);
+                dropRetries = 0;
+                log.Info("Dropped influxdb " + INFLUX_DB);
+            }
         }
 
-        public async static void createDB()
+        protected static int createRetries = 0;
+        public static void createDB()
         {
             log.Info("Creating influxdb " + INFLUX_DB);
-            await manager.Query("create database " + INFLUX_DB);
+
+            try
+            {
+                Task<HttpResponseMessage> response;
+                Task<String> responseString;
+
+                if (createRetries % 5 == 0)
+                {
+                    var content = new FormUrlEncodedContent(values);
+                    response = client.PostAsync(INFLUX_DB_URL + "/query?q=CREATE DATABASE " +
+                        INFLUX_DB, content);
+                    responseString = response.Result.Content.ReadAsStringAsync();
+                    log.Info("Got reponse: " + responseString.Result);
+                }
+                else
+                {
+                    log.Info("Waiting for create...");
+                    System.Threading.Thread.Sleep(2000);
+                }
+
+                response = client.GetAsync(INFLUX_DB_URL + "/query?q=SHOW DATABASES");
+                responseString = response.Result.Content.ReadAsStringAsync();
+                log.Info("Got reponse: " + responseString.Result);
+
+                if (!responseString.Result.Contains(INFLUX_DB))
+                {
+                    log.Error("DB: not created reattempting...");
+                    createRetries++;
+                    createDB();
+                }
+                else
+                {
+                    System.Threading.Thread.Sleep(2000);
+                    createRetries = 0;
+                    log.Info("Created influxdb db. ");
+                }
+            }
+            catch (Exception e)
+            {
+                log.Error("Failed to create db ", e);
+
+            }
         }
 
 
@@ -105,9 +187,11 @@ namespace wintac_utils.influxdb
             await manager.Write(m);
         }
 
-        public async static void WriteBulkMeasurements(List<Measurement> measurements)
+        public static void WriteBulkMeasurements(List<Measurement> measurements)
         {
-            await manager.Write(measurements);
+            log.Info("BEGIN: Writting bulk measurements [" + measurements.Count + "]");
+            manager.Write(measurements);
+            log.Info("END: writting bulk measurements [" + measurements.Count + "]");
         }
     }
 }

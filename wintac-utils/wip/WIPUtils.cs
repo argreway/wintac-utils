@@ -19,19 +19,19 @@ namespace wintac_utils.wip
         //protected static DateTime start = new DateTime(2018, 4, 1);
         //protected static DateTime end = new DateTime(2018, 5, 31);
         protected static DateTime start = new DateTime(2010, 1, 1);
-        protected static DateTime end = DateTime.Now;
+        protected static DateTime end = (DateTime.Now).AddDays(60);
 
         public static void insertAllStats()
         {
             String message = "Inserting all stats from " + start + " to " + end;
             log.Info(message);
-            MessageBox.Show(message);
 
-            //  MainApp.GetProgressBar().Visible = true;
-            // MainApp.GetProgressBar().Enabled = true;
+            if (MainApp.GetConsole())
+                MessageBox.Show(message);
 
             InfluxdbClient.dropDB();
             InfluxdbClient.createDB();
+            //System.Threading.Thread.Sleep(2000);
 
             insertInvoiceStats();
             log.Info("Finished invoices.");
@@ -43,10 +43,8 @@ namespace wintac_utils.wip
             log.Info("Finished po.");
             insertPayrollStats();
             log.Info("Finished pay.");
-            System.Threading.Thread.Sleep(5000);
-
-            //MainApp.GetProgressBar().Enabled = false;
-            //MainApp.GetProgressBar().Visible = false;
+            insertARStats();
+            log.Info("Finished ar.");
         }
 
         public static void getOutStandingWorkOrders()
@@ -82,6 +80,12 @@ namespace wintac_utils.wip
         {
             DataTable dt = MainApp.GetDBConnection().getOutStandingWorkOrders(start, end);
             updateWIPStats(dt, InfluxdbClient.COL.JDATE.ToString(), InfluxdbClient.WIP_FIELDS, InfluxdbClient.MEASUREMENT.WO.ToString());
+        }
+
+        public static void insertARStats()
+        {
+            DataTable dt = MainApp.GetDBConnection().getARDataTable(DateTime.Now);
+            updateWIPStats(dt, InfluxdbClient.COL.INVDATE.ToString(), InfluxdbClient.AR_FIELDS, InfluxdbClient.MEASUREMENT.AR.ToString());
         }
 
         protected static void updateWIPStats(DataTable dataTable, String dateColumn, List<String> fieldColumns, String measurement)
