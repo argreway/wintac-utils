@@ -19,8 +19,6 @@ namespace wintac_utils.dbconnect
         public String connectToDB(String server, String db, String user, String password)
         {
             string connectionString = null;
-            //connetionString = "Server=192.168.1.34\\WINTACSQL;Database=SENTRY4-4-2018;User ID=argreway;Password=Sniper13!";
-            //String escServer = server.Split('\\').Join(' ');
             connectionString = "Server=" + server + ";Database=" + db + ";User ID=" + user + ";Password=" + password;
             log.Info("Connecting to the DB: " + connectionString);
             cnn = new SqlConnection(connectionString);
