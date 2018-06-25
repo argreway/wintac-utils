@@ -21,6 +21,8 @@ namespace wintac_utils.wip
         protected static DateTime start = new DateTime(2010, 1, 1);
         protected static DateTime end = (DateTime.Now).AddDays(60);
 
+        private static readonly int BATCH_SIZE = 10000;
+
         public static void insertAllStats()
         {
             String message = "Inserting all stats from " + start + " to " + end;
@@ -45,11 +47,20 @@ namespace wintac_utils.wip
             log.Info("Finished pay.");
             insertARStats();
             log.Info("Finished ar.");
+            insertItems();
+            log.Info("Finished items.");
         }
 
         public static void getOutStandingWorkOrders()
         {
             MainApp.GetDBConnection().getOutStandingWorkOrders(start, end);
+        }
+
+        public static void insertItems()
+        {
+            DataTable dt = MainApp.GetDBConnection().getInvoiceItemTable();
+
+            updateWIPStats(dt, InfluxdbClient.COL.IDATE.ToString(), InfluxdbClient.ITEM_FIELDS, InfluxdbClient.ITEM_TAGS, InfluxdbClient.MEASUREMENT.ITEM.ToString());
         }
 
         public static void insertPayrollStats()
@@ -90,6 +101,11 @@ namespace wintac_utils.wip
 
         protected static void updateWIPStats(DataTable dataTable, String dateColumn, List<String> fieldColumns, String measurement)
         {
+            updateWIPStats(dataTable, dateColumn, fieldColumns, null, measurement);
+        }
+
+        protected static void updateWIPStats(DataTable dataTable, String dateColumn, List<String> fieldColumns, List<String> tagColumns, String measurement)
+        {
             List<Measurement> measurements = new List<Measurement>();
             DateTime timestamp = DateTime.Now;
 
@@ -98,12 +114,34 @@ namespace wintac_utils.wip
             {
                 Dictionary<string, object> fields = new Dictionary<string, object>();
                 Dictionary<string, string> tags = new Dictionary<string, string>();
+
                 foreach (DataColumn dc in dataTable.Columns)
                 {
+
+                    object value = row[dc.ColumnName.ToString()];
+                    if (value == null || value == DBNull.Value)
+                        continue;
+
                     if (isField(fieldColumns, dc.ColumnName))
+                    {
                         fields.Add(dc.ColumnName.ToString(), Convert.ToSingle(row[dc.ColumnName.ToString()]));
+                    }
+                    else if (isField(tagColumns, dc.ColumnName))
+                    {
+                        String tValue = row[dc.ColumnName.ToString()].ToString().Trim().Replace(" ", "_");
+                        tags.Add(dc.ColumnName.ToString(), tValue);
+                    }
+                    else if (tagColumns != null)
+                    {
+                        // Everything else should be treated as a string value
+                        String tValue = row[dc.ColumnName.ToString()].ToString().Trim().Replace(" ", "_");
+                        fields.Add(dc.ColumnName.ToString(), tValue);
+                    }
                     else
-                        tags.Add(dc.ColumnName.ToString(), row[dc.ColumnName].ToString());
+                    {
+                        String tValue = row[dc.ColumnName.ToString()].ToString().Trim().Replace(" ", "_");
+                        tags.Add(dc.ColumnName.ToString(), tValue);
+                    }
                 }
 
                 String convDate = row[dateColumn].ToString();
@@ -111,6 +149,13 @@ namespace wintac_utils.wip
                     timestamp = Convert.ToDateTime(convDate);
 
                 measurements.Add(InfluxdbClient.buildMeasurement(measurement, fields, tags, timestamp));
+
+                if (measurements.Count == BATCH_SIZE)
+                {
+                    InfluxdbClient.WriteBulkMeasurements(measurements);
+                    measurements.Clear();
+                    System.Threading.Thread.Sleep(1000);
+                }
             }
 
             // Bulk write out the stats
@@ -119,6 +164,8 @@ namespace wintac_utils.wip
 
         protected static bool isField(List<String> fieldList, String columnName)
         {
+            if (fieldList == null)
+                return false;
             foreach (String fieldName in fieldList)
             {
                 if (columnName == fieldName)

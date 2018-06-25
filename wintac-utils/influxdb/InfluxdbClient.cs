@@ -13,6 +13,8 @@ namespace wintac_utils.influxdb
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        static List<DateTime> stampList = new List<DateTime>();
+
         public enum MEASUREMENT
         {
             WO,
@@ -20,6 +22,7 @@ namespace wintac_utils.influxdb
             PO,
             PROP,
             PAY,
+            ITEM,
             AR
         }
 
@@ -28,10 +31,16 @@ namespace wintac_utils.influxdb
             TECH,
             JDATE,
             INVDATE,
+            IDATE,
             CHKDATE
         }
 
         public static List<String> WIP_FIELDS = new List<String> { "SUBTOTAL", "TOTTAX", "TOTTAX2", "MAT", "LAB", "MATC", "LABC" };
+        public static List<String> ITEM_FIELDS = new List<String> { "COST", "RP", "TOTCOST", "POCOST", "COST", "HQ", "HQ2" };
+        public static List<String> ITEM_TAGS = new List<String> { "MISC1", "DEPT", "DIVISION", "IC" };
+        //public static List<String> ITEM_FIELDS = new List<String> {
+        //    "COUNTER", "CN","[IN]","PAGENUM","POCOST","IC","NAME","HQ","HQ2","RP","COST","IDATE","CSDATE",
+        //        "DEPT","ACC1","ACC2","INOTE","MISC1","TOTCOST" };
         public static List<String> AR_FIELDS = new List<String> { "SUBTOTAL", "TOTTAX", "TOTTAX2", "MAT", "LAB", "MATC", "LABC",
             "BALANCE","RECEIPTS_PAID_AMOUNT" };
         public static List<String> PAY_FIELDS = new List<String> { "NHOURS ", "OHOURS ", "SHOURS ", "VHOURS ", "HOURS5 ", "HOURS6 ",
@@ -128,10 +137,8 @@ namespace wintac_utils.influxdb
             catch (Exception e)
             {
                 log.Error("Failed to create db ", e);
-
             }
         }
-
 
         public async static void testInfluxDBClient()
         {
@@ -143,13 +150,31 @@ namespace wintac_utils.influxdb
             Console.Write("connected");
         }
 
+
+        static int count = 0;
+        static int rotate = 0;
+        static Random random = new Random();
         public static Measurement buildMeasurement(String measurement, Dictionary<String, object> fields, Dictionary<String, String> tags, DateTime timestamp)
         {
             Measurement m = new Measurement(measurement);
             if (timestamp != null)
             {
-                DateTime iTimeStamp = new DateTime(timestamp.Year, timestamp.Month, timestamp.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second, DateTime.Now.Millisecond);
+                int milliRotate = random.Next(0, 999);
+                int minRotate = random.Next(0, 59);
+                int secRotate = random.Next(0, 59);
+                int hrRotate = random.Next(0, 59);
+                rotate++;
+                if (rotate % 1000 == 0 || (milliRotate + rotate) >= 1000)
+                    rotate = 0;
+
+                DateTime iTimeStamp = new DateTime(timestamp.Year, timestamp.Month, timestamp.Day, DateTime.Now.Hour, minRotate, secRotate, milliRotate + rotate);
                 m.Timestamp = iTimeStamp;
+
+                if (stampList.Contains(iTimeStamp))
+                {
+                    log.Error("Duplicate time stamp detected: " + ++count + " time: " + timestamp);
+                }
+                stampList.Add(iTimeStamp);
             }
             if (fields != null)
             {
@@ -159,6 +184,8 @@ namespace wintac_utils.influxdb
                         m.AddField(item.Key, (int)item.Value);
                     else if (item.Value is float)
                         m.AddField(item.Key, (float)item.Value);
+                    else if (item.Value is string)
+                        m.AddField(item.Key, (string)item.Value);
                 }
             }
             if (tags != null)
@@ -191,6 +218,7 @@ namespace wintac_utils.influxdb
         {
             log.Info("BEGIN: Writting bulk measurements [" + measurements.Count + "]");
             manager.Write(measurements);
+            stampList.Clear();
             log.Info("END: writting bulk measurements [" + measurements.Count + "]");
         }
     }

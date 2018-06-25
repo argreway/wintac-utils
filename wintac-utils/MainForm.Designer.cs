@@ -47,6 +47,7 @@
             this.updatePurchaseOrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateProposalsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updatePayrollToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateARToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.insertALLStatsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.influxDBAdminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createDBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,7 +68,7 @@
             this.buttonFindReverse = new System.Windows.Forms.Button();
             this.textBoxInputFind = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.updateARToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateInvoiceItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -186,6 +187,7 @@
             this.updateProposalsToolStripMenuItem,
             this.updatePayrollToolStripMenuItem,
             this.updateARToolStripMenuItem,
+            this.updateInvoiceItemsToolStripMenuItem,
             this.insertALLStatsToolStripMenuItem});
             this.statsToolStripMenuItem.Name = "statsToolStripMenuItem";
             this.statsToolStripMenuItem.Size = new System.Drawing.Size(78, 38);
@@ -225,6 +227,13 @@
             this.updatePayrollToolStripMenuItem.Size = new System.Drawing.Size(371, 38);
             this.updatePayrollToolStripMenuItem.Text = "Update Payroll";
             this.updatePayrollToolStripMenuItem.Click += new System.EventHandler(this.updatePayrollToolStripMenuItem_Click);
+            // 
+            // updateARToolStripMenuItem
+            // 
+            this.updateARToolStripMenuItem.Name = "updateARToolStripMenuItem";
+            this.updateARToolStripMenuItem.Size = new System.Drawing.Size(371, 38);
+            this.updateARToolStripMenuItem.Text = "Update AR";
+            this.updateARToolStripMenuItem.Click += new System.EventHandler(this.updateARToolStripMenuItem_Click);
             // 
             // insertALLStatsToolStripMenuItem
             // 
@@ -420,12 +429,12 @@
             this.label5.Text = "Find: ";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
-            // updateARToolStripMenuItem
+            // updateInvoiceItemsToolStripMenuItem
             // 
-            this.updateARToolStripMenuItem.Name = "updateARToolStripMenuItem";
-            this.updateARToolStripMenuItem.Size = new System.Drawing.Size(371, 38);
-            this.updateARToolStripMenuItem.Text = "Update AR";
-            this.updateARToolStripMenuItem.Click += new System.EventHandler(this.updateARToolStripMenuItem_Click);
+            this.updateInvoiceItemsToolStripMenuItem.Name = "updateInvoiceItemsToolStripMenuItem";
+            this.updateInvoiceItemsToolStripMenuItem.Size = new System.Drawing.Size(371, 38);
+            this.updateInvoiceItemsToolStripMenuItem.Text = "Update Invoice Items";
+            this.updateInvoiceItemsToolStripMenuItem.Click += new System.EventHandler(this.updateInvoiceItemsToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -504,6 +513,7 @@
         private System.Windows.Forms.ToolStripMenuItem createDBToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dropDBToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateARToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem updateInvoiceItemsToolStripMenuItem;
     }
 }
 

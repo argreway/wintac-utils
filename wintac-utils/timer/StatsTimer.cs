@@ -22,16 +22,16 @@ namespace wintac_utils.timer
         }
 
         long delay = 900000;
-        long interval = 43200000;
+        long interval = 86400000;
 
         public void RunTimer()
         {
             StateObj.TimerCanceled = false;
 
             MainApp.GetDBConnection().connectToDB(MainApp.getProperties().getServer(),
-             MainApp.getProperties().getDatabase(),
-             MainApp.getProperties().getUser(),
-             MainApp.getProperties().getPassword());
+            MainApp.getProperties().getDatabase(),
+            MainApp.getProperties().getUser(),
+            MainApp.getProperties().getPassword());
 
             System.Threading.TimerCallback TimerDelegate =
                 new System.Threading.TimerCallback(TimerTask);

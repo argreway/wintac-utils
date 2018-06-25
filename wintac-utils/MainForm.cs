@@ -264,5 +264,10 @@ namespace wintac_utils
         {
             WIPUtils.insertARStats();
         }
+
+        private void updateInvoiceItemsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WIPUtils.insertItems();
+        }
     }
 }

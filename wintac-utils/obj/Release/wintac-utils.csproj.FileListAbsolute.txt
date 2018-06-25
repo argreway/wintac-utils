@@ -34,6 +34,7 @@ C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\bin\Release\System.Diagn
 C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\bin\Release\System.Net.Http.Extensions.xml
 C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\bin\Release\System.Net.Http.Primitives.xml
 C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\obj\Release\wintac-utils.csproj.App.config
+C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\obj\Release\wintac-utils.csprojResolveAssemblyReference.cache
 C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\obj\Release\wintac_utils.MainForm.resources
 C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\obj\Release\wintac_utils.ProgressBar.resources
 C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\obj\Release\wintac_utils.ProjectInstaller.resources
@@ -44,4 +45,3 @@ C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\obj\Release\wintac-utils
 C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\obj\Release\wintac-utils.csproj.CopyComplete
 C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\obj\Release\wintac-utils.exe
 C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\obj\Release\wintac-utils.pdb
-C:\Users\tgreway\source\repos\wintac-utils\wintac-utils\obj\Release\wintac-utils.csprojResolveAssemblyReference.cache

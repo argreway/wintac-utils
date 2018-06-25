@@ -106,6 +106,39 @@ namespace wintac_utils.dbconnect
             sda.Update(dataTable);
         }
 
+        public DataTable getInvoiceItemTable()
+        {
+            //String selectString = "SELECT RPG.COUNTER,RPG.RPG.CN,RPG.[IN],RPG.PAGENUM,RPG.POCOST,RPG.IC," +
+            //   "RPG.NAME,RPG.HQ,RPG.HQ2,RPG.RP,RPG.COST,RPG.IDATE,RPG.CSDATE," +
+            //  "RPG.DEPT,RPG.ACC1,RPG.ACC2,RPG.INOTE,RPG.MISC1,RPG.POCOST * RPG.HQ2 as TOTCOST" +
+            // " FROM RPG,RCV,CST,RCVT WHERE IDATE IS NOT NULL AND IDATE like '%2017%' AND RPG.COST > 0 AND RPG.HQ2 > 0 " +
+            // "AND (RPG.TYPE IN (1 ,2 ,3 ,4 ) AND NOT(RPG.IC LIKE 'H_FLATRATE%' )";
+
+            String selectString = "SELECT " +
+                "CASE RPG.COST " +
+                "  WHEN 0 THEN RPG.POCOST " +
+                "  ELSE RPG.POCOST* RPG.HQ2 " +
+                "END AS TOTCOST, " +
+                "RPG.[COUNTER],RPG.CN,RPG.[IN],RPG.PAGENUM,RPG.POCOST,RPG.IC, " +
+                "RPG.NAME,RPG.HQ,RPG.HQ2,RPG.RP,RPG.COST,RPG.IDATE,RPG.CSDATE, " +
+                "RPG.DEPT,RPG.ACC1,RPG.ACC2,RPG.INOTE,RPG.MISC1,RCV.DEPT as DIVISION " +
+                //",RPG.POCOST * RPG.HQ2 as TOTCOST " +
+                "FROM RPG,RCV,CST,RCVT WHERE(((((((((({ fn length(RPG.IC )}> 0 ) " +
+                "AND NOT((RPG.IC LIKE 'H_FLATRATE%' ))) " +
+
+                "AND(RPG.IDATE like '%201%' ))))" +
+
+                //"AND (RPG.IDATE >= { d '2017-10-15'} ) AND (RPG.IDATE <= { d '2017-10-16'}) AND(RPG.MISC1 LIKE 'ID%')))) " +
+
+                "AND(RPG.TYPE IN(1, 2, 3, 4)) ) AND " +
+                "((RCV.CN = RPG.CN) AND(RCV.[IN] = RPG.[IN]))) AND " +
+                "((RCV.FRM = 2) AND (RCV.AUTOWIP = 0))) " +
+                "AND(CST.CN = RCV.CN) ) AND(RCV.COUNTER = RCVT.RCVPK))";
+            //" FROM dbo.RPG WHERE((CN = 6699) AND([IN] = 123)) " +
+            //" ORDER BY dbo.RPG.CN ,dbo.RPG.[IN], dbo.RPG.PAGENUM";
+            return getDataTable(selectString);
+        }
+
         public DataTable getPayrollDataTable(DateTime start, DateTime end)
         {
             String selectString = "SELECT PAY.EN , PAY.NAME , PAY.CHKNUM , PAY.CHKDATE , PAY.NHOURS , PAY.OHOURS , PAY.SHOURS , PAY.VHOURS , PAY.HOURS5 , PAY.HOURS6 , PAY.HOURS7 , PAY.HOURS8 , PAY.HOURS9 , PAY.HOURS10 , " +
@@ -180,6 +213,8 @@ namespace wintac_utils.dbconnect
                 MainApp.getMainForm().GetDataGridView().DataSource = bsource;
                 sda.Update(dataTable);
             }
+
+            log.Info("Found: " + dataTable.Rows.Count);
 
             return dataTable;
         }
